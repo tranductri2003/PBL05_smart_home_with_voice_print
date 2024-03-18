@@ -1,3 +1,7 @@
 venv
 env
 .env
+
+16000_pcm_speeches
+speaker-recognition-dataset.zip
+our-voices
