@@ -1,0 +1,25 @@
+Phòng khách:
+"{tên người nói}_mo_cua_phong_khach.wav": Tôi muốn Mở cửa trong phòng khách.
+"{tên người nói}_bat_den_phong_khach.wav": Tôi muốn Bật đèn trong phòng khách.
+"{tên người nói}_tat_den_phong_khach.wav": Tôi muốn Tắt đèn trong phòng khách.
+
+Phòng ngủ con cái:
+"{tên người nói}_bat_den_phong_ngu_con_cai.wav": Tôi muốn Bật đèn ở phòng ngủ con cái.
+"{tên người nói}_tat_den_phong_ngu_con_cai.wav": Tôi muốn Tắt đèn ở phòng ngủ con cái.
+"{tên người nói}_mo_cua_phong_ngu_con_cai.wav": Tôi muốn Mở cửa ở phòng ngủ con cái.
+
+Phòng ngủ ba mẹ:
+"{tên người nói}_bat_den_phong_ngu_ba_me.wav": Tôi muốn Bật đèn ở phòng ngủ ba mẹ.
+"{tên người nói}_tat_den_phong_ngu_ba_me.wav": Tôi muốn Tắt đèn ở phòng ngủ ba mẹ.
+"{tên người nói}_mo_cua_phong_ngu_ba_me.wav": Tôi muốn Mở cửa ở phòng ngủ ba mẹ.
+
+Phòng bếp:
+"{tên người nói}_xem_nhiet_do_do_am_phong_bep.wav": Tôi muốn Xem nhiệt độ độ ẩm trong phòng bếp.
+"{tên người nói}_bat_den_phong_bep.wav": Tôi muốn Bật đèn ở phòng ngủ ba mẹ.
+"{tên người nói}_tat_den_phong_bep.wav": Tôi muốn Tắt đèn ở phòng ngủ ba mẹ.
+
+Garage:
+"{tên người nói}_mo_cua_cuon_garage.wav": Tôi muốn Mở cửa cuốn trong garage.
+"{tên người nói}_dong_cua_cuon_garage.wav": Tôi muốn Đóng cửa cuốn trong garage.
+"{tên người nói}_bat_den_garage.wav": Tôi muốn Bật đèn ở garage.
+"{tên người nói}_tat_den_garage.wav": Tôi muốn Tắt đèn ở garage.
