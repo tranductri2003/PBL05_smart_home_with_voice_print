@@ -1,0 +1,131 @@
+| Tên Mô Hình                                                   | EER  | Bộ Dữ Liệu Test          | SEQ_LEN | Dự Đoán Chính Xác | Tổng Số Dự Đoán | Độ Chính Xác |
+|---------------------------------------------------------------|------|--------------------------|---------|-------------------|-----------------|--------------|
+| saved_model_mfcc_lstm_100-hours_100-epochs_specaug_batch_8.pt | 0.18 | Data Tiếng nói tổng hợp  | 10      | 59                | 102             | 57.84%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt | 0.15 | Data Tiếng nói tổng hợp  | 10      | 73                | 102             | 71.56%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt | 0.15 | Data Tiếng nói tổng hợp  | 20      | 60                | 102             | 58.82%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt | 0.15 | Data Tiếng nói tổng hợp  | 30      | 59                | 102             | 57.84%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt | 0.15 | Data Tiếng nói tổng hợp  | 5       | 83                | 102             | 81.37%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt | 0.15 | Data Tiếng nói tổng hợp  | 15      | 70                | 102             | 68.63%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt | 0.15 | Data Tiếng nói tổng hợp  | 2       | 77                | 102             | 75.49%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt | 0.15 | Data Tiếng nói để train  | 5       | 36                | 40              | 90.00%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt | 0.15 | Data Tiếng nói để train  | 10      | 34                | 40              | 85.00%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt | 0.15 | Data Tiếng nói để dk nhà | 5       | 47                | 62              | 75.81%       |
+| saved_model_20240320203146.ckpt-20000.pt                      | 0.15 | Data Tiếng nói tống hợp  | 5       | 81                | 102             | 79.41%       |
+| saved_model_20240320203146.ckpt-20000.pt                      | 0.15 | Data Tiếng nói để train  | 5       | 38                | 40              | 95.00%       |
+| saved_model_20240320203146.ckpt-20000.pt                      | 0.15 | Data Tiếng nói để đk nhà | 5       | 43                | 62              | 69.35%       |
+| models_lstm_mfcc_100k_specaug_batch_8 (tốt nhất  của chị Nhi) | 0.15 | Data Tiếng nói để đk nhà | 5       | 38                | 62              | 61.29%       |
+| models_lstm_mfcc_100k_specaug_batch_8 (tốt nhất  của chị Nhi) | 0.15 | Data Tiếng nói để train  | 5       | 36                | 40              | 90.00%       |
+| models_lstm_mfcc_100k_specaug_batch_8 (tốt nhất  của chị Nhi) | 0.15 | Data Tiếng nói tổng hợp  | 5       | 74                | 102             | 72.55%       |
+
+
+
+
+
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Trí [FALSE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Trí [FALSE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Phát Predict: Phát [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Phát [FALSE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Tuấn [FALSE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Phát [FALSE]
+Speaker: Trí Predict: Phát [FALSE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Phát [FALSE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Phát [FALSE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Trí [TRUE]
+Speaker: Trí Predict: Đạt [FALSE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Đạt [FALSE]
+Speaker: Tuấn Predict: Đạt [FALSE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Phát [FALSE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Trí [FALSE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Tuấn [TRUE]
+Speaker: Tuấn Predict: Trí [FALSE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Phát [FALSE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Phát [FALSE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Phát [FALSE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Phát [FALSE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Đạt [TRUE]
+Speaker: Đạt Predict: Phát [FALSE]
+7.06620979309082
+Model: D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\saved_model\train-clean-360\saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt
+Seq length: 5
+Accurate prediction: 83
+Total prediction: 102
+Accuracy: 81.37254901960785%
