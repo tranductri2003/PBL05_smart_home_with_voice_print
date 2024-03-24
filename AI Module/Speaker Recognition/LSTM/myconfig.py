@@ -11,7 +11,6 @@ TEST_DATA_DIR = os.path.join(os.path.expanduser('~'), r"D:\Code\BachKhoa\PBL 5\P
 timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
 filename = f"saved_model_{timestamp}.pt"
 SAVED_MODEL_PATH = os.path.join(os.path.expanduser('~'), r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\saved_model", filename)
-BEST_MODEL_PATH = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\saved_model\best-model\saved_model_20240320203146.ckpt-20000.pt"
 
 # Number of samples in each training batch
 BATCH_SIZE = 8
@@ -44,7 +43,7 @@ SEQ_LEN = 5
 # Whether to use SpecAugment during training or not
 SPECAUG_TRAINING = True
 # Frequency of saving the model
-SAVE_MODEL_FREQUENCY = 10000
+SAVE_MODEL_FREQUENCY = 5000
 
 # Parameters for SpecAugment
 SPECAUG_FREQ_MASK_PROB = 0.3
