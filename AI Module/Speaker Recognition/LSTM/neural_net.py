@@ -68,7 +68,7 @@ class LstmSpeakerEncoder(BaseSpeakerEncoder):
         return self._aggregate_frames(y)
 
 
-def get_speaker_encoder(load_from=r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\saved_model\best-model\saved_model_20240320203146.ckpt-20000.pt"):
+def get_speaker_encoder(load_from=""):
     """Create speaker encoder model or load it from a saved model."""
     if myconfig.USE_TRANSFORMER:
         return TransformerSpeakerEncoder(load_from).to(myconfig.DEVICE)

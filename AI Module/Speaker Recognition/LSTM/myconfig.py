@@ -64,7 +64,7 @@ TRANSFORMER_ENCODER_LAYERS = 2
 TRANSFORMER_HEADS = 8
 
 # Number of triplets used to evaluate Equal Error Rate (EER)
-NUM_EVAL_TRIPLETS = 100
+NUM_EVAL_TRIPLETS = 10000
 
 # Whether to use the full sequence for prediction
 USE_FULL_SEQUENCE_INFERENCE = False
