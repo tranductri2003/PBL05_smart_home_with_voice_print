@@ -21,7 +21,7 @@ phat_base_embedding = inference.get_embedding(r"D:\Code\BachKhoa\PBL 5\PBL05_sma
 
 
 
-data_source = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\Data Tiếng nói để điều khiển nhà"
+data_source = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\Data Tiếng nói để train"
 
 total_prediction = 0 
 accurate_prediction = 0

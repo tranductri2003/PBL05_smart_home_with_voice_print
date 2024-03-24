@@ -28,8 +28,6 @@ def run_inference(features, encoder, full_sequence=myconfig.USE_FULL_SEQUENCE_IN
 
 def cosine_similarity(a, b):
     """Compute cosine similarity between two embeddings."""
-    print(len(a))
-    print(len(b))
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
 class TripletScoreFetcher:
@@ -101,7 +99,7 @@ def run_eval():
     start_time = time.time()
     spk_to_utts =  dataset.get_librispeech_speaker_to_utterance(myconfig.TEST_DATA_DIR)
     print("Evaluation data:", myconfig.TEST_DATA_DIR)
-    encoder = neural_net.get_speaker_encoder(r'D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\Audio_speakerRecognition\saved_model\saved_model_20230514232827.pt')
+    encoder = neural_net.get_speaker_encoder(r'D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\saved_model\train-clean-360-hours-50000-epochs\saved_model_20240320203146.ckpt-20000.pt')
     labels, scores = compute_scores(encoder, spk_to_utts, myconfig.NUM_EVAL_TRIPLETS)
     eer, eer_threshold = compute_eer(labels, scores)
     eval_time = time.time() - start_time
