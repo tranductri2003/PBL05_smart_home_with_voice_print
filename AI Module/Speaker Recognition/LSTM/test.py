@@ -9,7 +9,7 @@ import myconfig
 
 
 # Load pre-trained encoder
-encoder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\saved_model\train-clean-360-hours-50000-epochs\saved_model_20240320203146.ckpt-20000.pt"
+encoder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\saved_model\train-clean-360-hours-50000-epochs-cpu\saved_model_mfcc_lstm_360-hours_50000-epochs_specaug_batch_8_cpu.pt"
 encoder = neural_net.get_speaker_encoder(encoder_path)
 
 start_time = time.time()
@@ -21,7 +21,7 @@ phat_base_embedding = inference.get_embedding(r"D:\Code\BachKhoa\PBL 5\PBL05_sma
 
 
 
-data_source = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\Data Tiếng nói để train"
+data_source = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\Data Tiếng nói tổng hợp"
 
 total_prediction = 0 
 accurate_prediction = 0

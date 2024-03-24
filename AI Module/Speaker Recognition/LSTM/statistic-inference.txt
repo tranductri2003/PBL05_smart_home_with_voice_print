@@ -1,24 +1,27 @@
-| Tên Mô Hình                                                    | EER  | Bộ Dữ Liệu Test          | SEQ_LEN | Dự Đoán Chính Xác | Tổng Số Dự Đoán | Độ Chính Xác |
-|----------------------------------------------------------------|------|--------------------------|---------|-------------------|-----------------|--------------|
-| saved_model_mfcc_lstm_100-hours_100-epochs_specaug_batch_8.pt  | 0.18 | Data Tiếng nói tổng hợp  | 10      | 59                | 102             | 57.84%       |
-| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt  | 0.15 | Data Tiếng nói tổng hợp  | 10      | 73                | 102             | 71.56%       |
-| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt  | 0.15 | Data Tiếng nói tổng hợp  | 20      | 60                | 102             | 58.82%       |
-| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt  | 0.15 | Data Tiếng nói tổng hợp  | 30      | 59                | 102             | 57.84%       |
-| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt  | 0.15 | Data Tiếng nói tổng hợp  | 5       | 83                | 102             | 81.37%       |
-| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt  | 0.15 | Data Tiếng nói tổng hợp  | 15      | 70                | 102             | 68.63%       |
-| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt  | 0.15 | Data Tiếng nói tổng hợp  | 2       | 77                | 102             | 75.49%       |
-| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt  | 0.15 | Data Tiếng nói để train  | 5       | 36                | 40              | 90.00%       |
-| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt  | 0.15 | Data Tiếng nói để train  | 10      | 34                | 40              | 85.00%       |
-| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt  | 0.15 | Data Tiếng nói để dk nhà | 5       | 47                | 62              | 75.81%       |
-| saved_model_20240320203146.ckpt-20000.pt                       | 0.15 | Data Tiếng nói tống hợp  | 5       | 81                | 102             | 79.41%       |
-| saved_model_20240320203146.ckpt-20000.pt                       | 0.15 | Data Tiếng nói để train  | 5       | 38                | 40              | 95.00%       |
-| saved_model_20240320203146.ckpt-20000.pt                       | 0.15 | Data Tiếng nói để đk nhà | 5       | 43                | 62              | 69.35%       |
-| models_lstm_mfcc_100k_specaug_batch_8 (tốt nhất  của chị Nhi)  | 0.15 | Data Tiếng nói tổng hợp  | 5       | 74                | 102             | 72.55%       |
-| models_lstm_mfcc_100k_specaug_batch_8 (tốt nhất  của chị Nhi)  | 0.15 | Data Tiếng nói để train  | 5       | 36                | 40              | 90.00%       |
-| models_lstm_mfcc_100k_specaug_batch_8 (tốt nhất  của chị Nhi)  | 0.15 | Data Tiếng nói để đk nhà | 5       | 38                | 62              | 61.29%       |
-| saved_model_mfcc_lstm_360-hours_50000-epochs_specaug_batch_8.pt| 0.15 | Data Tiếng nói tổng hợp  | 5       | 76                | 102             | 74.51%       |
-| saved_model_mfcc_lstm_360-hours_50000-epochs_specaug_batch_8.pt| 0.15 | Data Tiếng nói để train  | 5       | 38                | 40              | 95.00%       |
-| saved_model_mfcc_lstm_360-hours_50000-epochs_specaug_batch_8.pt| 0.15 | Data Tiếng nói để đk nhà | 5       | 38                | 62              | 61.29%       |
+| Tên Mô Hình                                                        | EER  | Bộ Dữ Liệu Test          | SEQ_LEN | Dự Đoán Chính Xác | Tổng Số Dự Đoán | Độ Chính Xác |
+|--------------------------------------------------------------------|------|--------------------------|---------|-------------------|-----------------|--------------|
+| saved_model_mfcc_lstm_100-hours_100-epochs_specaug_batch_8.pt      | 0.18 | Data Tiếng nói tổng hợp  | 10      | 59                | 102             | 57.84%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt      | 0.15 | Data Tiếng nói tổng hợp  | 10      | 73                | 102             | 71.56%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt      | 0.15 | Data Tiếng nói tổng hợp  | 20      | 60                | 102             | 58.82%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt      | 0.15 | Data Tiếng nói tổng hợp  | 30      | 59                | 102             | 57.84%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt      | 0.15 | Data Tiếng nói tổng hợp  | 5       | 83                | 102             | 81.37%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt      | 0.15 | Data Tiếng nói tổng hợp  | 15      | 70                | 102             | 68.63%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt      | 0.15 | Data Tiếng nói tổng hợp  | 2       | 77                | 102             | 75.49%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt      | 0.15 | Data Tiếng nói để train  | 5       | 36                | 40              | 90.00%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt      | 0.15 | Data Tiếng nói để train  | 10      | 34                | 40              | 85.00%       |
+| saved_model_mfcc_lstm_360-hours_100-epochs_specaug_batch_8.pt      | 0.15 | Data Tiếng nói để dk nhà | 5       | 47                | 62              | 75.81%       |
+| saved_model_20240320203146.ckpt-20000.pt                           | 0.15 | Data Tiếng nói tống hợp  | 5       | 81                | 102             | 79.41%       |
+| saved_model_20240320203146.ckpt-20000.pt                           | 0.15 | Data Tiếng nói để train  | 5       | 38                | 40              | 95.00%       |
+| saved_model_20240320203146.ckpt-20000.pt                           | 0.15 | Data Tiếng nói để đk nhà | 5       | 43                | 62              | 69.35%       |
+| models_lstm_mfcc_100k_specaug_batch_8 (tốt nhất  của chị Nhi)      | 0.15 | Data Tiếng nói tổng hợp  | 5       | 74                | 102             | 72.55%       |
+| models_lstm_mfcc_100k_specaug_batch_8 (tốt nhất  của chị Nhi)      | 0.15 | Data Tiếng nói để train  | 5       | 36                | 40              | 90.00%       |
+| models_lstm_mfcc_100k_specaug_batch_8 (tốt nhất  của chị Nhi)      | 0.15 | Data Tiếng nói để đk nhà | 5       | 38                | 62              | 61.29%       |
+| saved_model_mfcc_lstm_360-hours_50000-epochs_specaug_batch_8_gpu.pt| 0.15 | Data Tiếng nói tổng hợp  | 5       | 76                | 102             | 74.51%       |
+| saved_model_mfcc_lstm_360-hours_50000-epochs_specaug_batch_8_gpu.pt| 0.15 | Data Tiếng nói để train  | 5       | 38                | 40              | 95.00%       |
+| saved_model_mfcc_lstm_360-hours_50000-epochs_specaug_batch_8_gpu.pt| 0.15 | Data Tiếng nói để đk nhà | 5       | 38                | 62              | 61.29%       |
+| saved_model_mfcc_lstm_360-hours_50000-epochs_specaug_batch_8_cpu.pt| 0.15 | Data Tiếng nói tổng hợp  | 5       | 85                | 102             | 83.33%       |
+| saved_model_mfcc_lstm_360-hours_50000-epochs_specaug_batch_8_cpu.pt| 0.15 | Data Tiếng nói để train  | 5       | 39                | 40              | 97.50%       |
+| saved_model_mfcc_lstm_360-hours_50000-epochs_specaug_batch_8_cpu.pt| 0.15 | Data Tiếng nói để đk nhà | 5       | 46                | 62              | 74.19%       |
 
 
 
