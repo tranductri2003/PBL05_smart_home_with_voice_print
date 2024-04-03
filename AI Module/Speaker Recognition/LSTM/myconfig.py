@@ -31,7 +31,7 @@ N_MFCC = 40
 # Size of LSTM hidden layers
 LSTM_HIDDEN_SIZE = 64
 # Number of LSTM layers stacked on top of each other
-LSTM_NUM_LAYERS = 3
+LSTM_NUM_LAYERS = 4
 # Whether to use bidirectional LSTM or not
 BI_LSTM = True
 # Method of aggregating frames, whether it's mean or not
@@ -63,7 +63,7 @@ TRANSFORMER_ENCODER_LAYERS = 2
 TRANSFORMER_HEADS = 8
 
 # Number of triplets used to evaluate Equal Error Rate (EER)
-NUM_EVAL_TRIPLETS = 10000
+NUM_EVAL_TRIPLETS = 1000
 
 # Whether to use the full sequence for prediction
 USE_FULL_SEQUENCE_INFERENCE = False
