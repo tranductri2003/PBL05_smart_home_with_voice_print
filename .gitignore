@@ -1,3 +1,22 @@
 venv
 env
 .env
+
+16000_pcm_speeches
+speaker-recognition-dataset.zip
+our-voices
+
+Voiceprint Recognition System using Deep Learning 91f683617c1d417eb97d622fdeaece7d
+Voiceprint Recognition System using Deep Learning 91f683617c1d417eb97d622fdeaece7d.pdf
+DATN-final.pdf
+
+test-clean.tar.gz
+train-clean-100.tar.gz
+train-clean-360.tar.gz
+train-other-500.tar.gz
+
+LibriSpeech
+Nhi
+voicerecognizer_torchv2env
+Audio_speakerRecognition
+
