@@ -1,0 +1,92 @@
+Tôi/N muốn/V Tắt/V đèn/N trong/E phòng/N khách/N
+Tôi/N muốn/V Bật/V đèn/N ở/E phòng/N ngủ/N con_cái/N
+Tôi/N muốn/V Tắt/V đèn/N ở/E phòng/N ngủ/N con_cái/N
+Tôi/N muốn/V Mở/V cửa/N ở/E phòng/N ngủ/N con_cái/N
+Tôi/N muốn/V Bật/V đèn/N ở/E phòng/N ngủ/N ba/N mẹ/N
+Tôi/N muốn/V Tắt/V đèn/N ở/E phòng/N ngủ/N ba/N mẹ/N
+Tôi/N muốn/V Mở/V cửa/N ở/E phòng/N ngủ/N ba/N mẹ/N
+Tôi/N muốn/V Xem/V nhiệt_độ/N độ_ẩm/N trong/E phòng/N bếp/N
+Tôi/N muốn/V Tắt/V đèn/N ở/E phòng/N bếp/N
+Tôi/N muốn/V Bật/V đèn/N ở/E phòng/N bếp/N
+Tôi/N muốn/V Mở/V cửa/N ở/E phòng/N bếp/N
+Tôi/N muốn/V Mở/V cửa_cuốn/N trong/E garage/N
+Tôi/N muốn/V Đóng/V cửa_cuốn/N trong/E garage/N
+Tôi/N muốn/V Bật/V đèn/N ở/E garage/N
+Tôi/N muốn/V Tắt/V đèn/N ở/E garage/N
+Tôi/N muốn/V mở/V cửa/N trong/E phòng/N khách/N
+Tôi/N muốn/V bật/V đèn/N trong/E phòng/N khách/N
+Tôi/N muốn/V tắt/V đèn/N trong/E phòng/N khách/N
+Tôi/N muốn/V bật/V đèn/N ở/E phòng/N ngủ/N con_cái/N
+Tôi/N muốn/V tắt/V đèn/N ở/E phòng/N ngủ/N con_cái/N
+Tôi/N muốn/V mở/V cửa/N ở/E phòng/N ngủ/N con_cái/N
+Tôi/N muốn/V bật/V đèn/N ở/E phòng/N ngủ/N ba/N mẹ/N
+Tôi/N muốn/V tắt/V đèn/N ở/E phòng/N ngủ/N ba/N mẹ/N
+Tôi/N muốn/V mở/V cửa/N ở/E phòng/N ngủ/N ba/N mẹ/N
+Tôi/N muốn/V Xem/V nhiệt_độ/N độ_ẩm/N trong/E phòng/N bếp/N
+Tôi/N muốn/V tắt/V đèn/N ở/E phòng/N bếp/N
+Tôi/N muốn/V bật/V đèn/N ở/E phòng/N bếp/N
+Tôi/N muốn/V mở/V cửa/N ở/E phòng/N bếp/N
+Tôi/N muốn/V mở_cửa_cuốn/V trong/E garage/N
+Tôi/N muốn/V đóng/V cửa_cuốn/N trong/E garage/N
+Tôi/N muốn/V bật/V đèn/N ở/E garage/N
+Tôi/N muốn/V tắt/V đèn/N ở/E garage/N
+tôi/N muốn/V mở/V cửa/N trong/E phòng/N khách/N
+tôi/N muốn/V bật/V đèn/N trong/E phòng/N khách/N
+tôi/N muốn/V tắt/V đèn/N trong/E phòng/N khách/N
+tôi/N muốn/V bật/V đèn/N ở/E phòng/N ngủ/N con_cái/N
+tôi/N muốn/V tắt/V đèn/N ở/E phòng/N ngủ/N con_cái/N
+tôi/N muốn/V mở/V cửa/N ở/E phòng/N ngủ/N con_cái/N
+tôi/N muốn/V bật/V đèn/N ở/E phòng/N ngủ/N ba/N mẹ/N
+tôi/N muốn/V tắt/V đèn/N ở/E phòng/N ngủ/N ba/N mẹ/N
+tôi/N muốn/V mở/V cửa/N ở/E phòng/N ngủ/N ba/N mẹ/N
+tôi/N muốn/V tắt/V đèn/N ở/E phòng/N bếp/N
+tôi/N muốn/V bật/V đèn/N ở/E phòng/N bếp/N
+tôi/N muốn/V mở/V cửa/N ở/E phòng/N bếp/N
+tôi/N muốn/V mở/V cửa_cuốn/N trong/E garage/N
+tôi/N muốn/V đóng/V cửa_cuốn/N trong/E garage/N
+tôi/N muốn/V bật/V đèn/N ở/E garage/N
+tôi/N muốn/V tắt/V đèn/N ở/E garage/N
+Mở/V cửa_sổ/N trong/E phòng/N khách/N
+Đóng/V rèm_cửa/N trong/E phòng/N khách/N
+Tăng/V độ_sáng/N đèn/N trong/E phòng/N khách/N
+Giảm/V độ_sáng/N đèn/N trong/E phòng/N khách/N
+Mở/V cửa_sổ/N ở/E phòng/N ngủ/N con_cái/N
+Đóng/V rèm_cửa/N ở/E phòng/N ngủ/N con_cái/N
+Tăng/V độ_sáng/N đèn/N ở/E phòng/N ngủ/N con_cái/N
+Giảm/V độ_sáng/N đèn/N ở/E phòng/N ngủ/N con_cái/N
+Mở/V cửa_sổ/N ở/E phòng/N ngủ/N ba/N mẹ/N
+Đóng/V rèm_cửa/N ở/E phòng/N ngủ/N ba/N mẹ/N
+Tăng/V độ_sáng/N đèn/N ở/E phòng/N ngủ/N ba/N mẹ/N
+Giảm/V độ_sáng/N đèn/N ở/E phòng/N ngủ/N ba/N mẹ/N
+Mở/V cửa_sổ/N ở/E phòng/N bếp/N
+Đóng/V rèm_cửa/N ở/E phòng/N bếp/N
+Tăng/V độ_sáng/N đèn/N ở/E phòng/N bếp/N
+Giảm/V độ_sáng/N đèn/N ở/E phòng/N bếp/N
+Mở/V cửa_sổ/N trong/E garage/N
+Đóng/V cửa_cuốn/N trong/E garage/N
+Tăng/V độ_sáng/N đèn/N trong/E garage/N
+Giảm/V độ_sáng/N đèn/N trong/E garage/N
+Mở/V cửa_sổ/N ở/E phòng/N làm_việc/N
+Đóng/V rèm_cửa/N ở/E phòng/N làm_việc/N
+Tăng/V độ_sáng/N đèn/N ở/E phòng/N làm_việc/N
+Giảm/V độ_sáng/N đèn/N ở/E phòng/N làm_việc/N
+Mở/V cửa_sổ/N ở/E phòng/N ngủ/N khách/N
+Đóng/V rèm_cửa/N ở/E phòng/N ngủ/N khách/N
+Tăng/V độ_sáng/N đèn/N ở/E phòng/N ngủ/N khách/N
+Giảm/V độ_sáng/N đèn/N ở/E phòng/N ngủ/N khách/N
+Mở/V cửa_sổ/N ở/E phòng/N bếp/N
+Đóng/V cửa/N ở/E phòng/N bếp/N
+Tăng/V độ_sáng/N đèn/N ở/E phòng/N bếp/N
+Giảm/V độ_sáng/N đèn/N ở/E phòng/N bếp/N
+Mở/V cửa_sổ/N ở/E phòng/N ngủ/N trẻ_em/N
+Đóng/V rèm_cửa/N ở/E phòng/N ngủ/N trẻ_em/N
+Tăng/V độ_sáng/N đèn/N ở/E phòng/N ngủ/N trẻ_em/N
+Giảm/V độ_sáng/N đèn/N ở/E phòng/N ngủ/N trẻ_em/N
+Mở/V cửa_sổ/N ở/E nhà/N vệ_sinh/N
+Đóng/V cửa/N ở/E nhà/N vệ_sinh/N
+Tăng/V độ_sáng/N đèn/N ở/E nhà/N vệ_sinh/N
+Giảm/V độ_sáng/N đèn/N ở/E nhà/N vệ_sinh/N
+Mở/V cửa_sổ/N ở/E phòng/N khách/N
+Đóng/V rèm_cửa/N ở/E phòng/N khách/N
+Tăng/V độ_sáng/N đèn/N ở/E phòng/N khách/N
+Giảm/V độ_sáng/N đèn/N ở/E phòng/N khách/N
