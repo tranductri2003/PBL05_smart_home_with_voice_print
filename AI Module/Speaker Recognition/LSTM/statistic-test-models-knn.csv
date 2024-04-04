@@ -1,0 +1,64 @@
+Model,Test Dataset,EER-Threshold,N_Taken Audio,K-Nearest Neighbours,Accurate Prediction,Total Prediction,Percentage
+mfcc_lstm_model_100k_specaug_batch_8_saved_model.pt,Data Tiếng nói tổng hợp,0,5,3,84,102,82.35294117647058
+mfcc_lstm_model_100k_specaug_batch_8_saved_model.pt,Data Tiếng nói để train,0,5,3,40,40,100.0
+mfcc_lstm_model_100k_specaug_batch_8_saved_model.pt,Data Tiếng nói để điều khiển nhà,0,5,3,44,62,70.96774193548387
+mfcc_lstm_model_100k_specaug_batch_8_saved_model.pt,Data Tiếng nói tổng hợp,0,7,5,82,102,80.3921568627451
+mfcc_lstm_model_100k_specaug_batch_8_saved_model.pt,Data Tiếng nói để train,0,7,5,40,40,100.0
+mfcc_lstm_model_100k_specaug_batch_8_saved_model.pt,Data Tiếng nói để điều khiển nhà,0,7,5,42,62,67.74193548387096
+mfcc_lstm_model_100k_specaug_batch_8_saved_model.pt,Data Tiếng nói tổng hợp,0,10,7,87,102,85.29411764705883
+mfcc_lstm_model_100k_specaug_batch_8_saved_model.pt,Data Tiếng nói để train,0,10,7,40,40,100.0
+mfcc_lstm_model_100k_specaug_batch_8_saved_model.pt,Data Tiếng nói để điều khiển nhà,0,10,7,47,62,75.80645161290323
+mfcc_lstm_model_100h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,5,3,63,102,61.76470588235294
+mfcc_lstm_model_100h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,5,3,35,40,87.5
+mfcc_lstm_model_100h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,5,3,28,62,45.16129032258064
+mfcc_lstm_model_100h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,7,5,71,102,69.6078431372549
+mfcc_lstm_model_100h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,7,5,36,40,90.0
+mfcc_lstm_model_100h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,7,5,35,62,56.451612903225815
+mfcc_lstm_model_100h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,10,7,75,102,73.52941176470588
+mfcc_lstm_model_100h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,10,7,39,40,97.5
+mfcc_lstm_model_100h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,10,7,36,62,58.06451612903226
+mfcc_lstm_model_360h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,5,3,66,102,64.70588235294117
+mfcc_lstm_model_360h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,5,3,37,40,92.5
+mfcc_lstm_model_360h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,5,3,29,62,46.774193548387096
+mfcc_lstm_model_360h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,7,5,63,102,61.76470588235294
+mfcc_lstm_model_360h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,7,5,37,40,92.5
+mfcc_lstm_model_360h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,7,5,26,62,41.935483870967744
+mfcc_lstm_model_360h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,10,7,65,102,63.725490196078425
+mfcc_lstm_model_360h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,10,7,36,40,90.0
+mfcc_lstm_model_360h_100epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,10,7,29,62,46.774193548387096
+mfcc_lstm_model_360h_20000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,5,3,84,102,82.35294117647058
+mfcc_lstm_model_360h_20000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,5,3,39,40,97.5
+mfcc_lstm_model_360h_20000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,5,3,45,62,72.58064516129032
+mfcc_lstm_model_360h_20000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,7,5,82,102,80.3921568627451
+mfcc_lstm_model_360h_20000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,7,5,40,40,100.0
+mfcc_lstm_model_360h_20000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,7,5,42,62,67.74193548387096
+mfcc_lstm_model_360h_20000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,10,7,87,102,85.29411764705883
+mfcc_lstm_model_360h_20000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,10,7,40,40,100.0
+mfcc_lstm_model_360h_20000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,10,7,47,62,75.80645161290323
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,5,3,95,102,93.13725490196079
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,5,3,39,40,97.5
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,5,3,56,62,90.32258064516128
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,7,5,92,102,90.19607843137256
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,7,5,39,40,97.5
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,7,5,53,62,85.48387096774194
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,10,7,88,102,86.27450980392157
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,10,7,40,40,100.0
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,10,7,48,62,77.41935483870968
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_gpu.pt,Data Tiếng nói tổng hợp,0,5,3,83,102,81.37254901960785
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_gpu.pt,Data Tiếng nói để train,0,5,3,40,40,100.0
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_gpu.pt,Data Tiếng nói để điều khiển nhà,0,5,3,43,62,69.35483870967742
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_gpu.pt,Data Tiếng nói tổng hợp,0,7,5,86,102,84.31372549019608
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_gpu.pt,Data Tiếng nói để train,0,7,5,40,40,100.0
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_gpu.pt,Data Tiếng nói để điều khiển nhà,0,7,5,46,62,74.19354838709677
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_gpu.pt,Data Tiếng nói tổng hợp,0,10,7,83,102,81.37254901960785
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_gpu.pt,Data Tiếng nói để train,0,10,7,40,40,100.0
+mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_gpu.pt,Data Tiếng nói để điều khiển nhà,0,10,7,43,62,69.35483870967742
+mfcc_lstm_model_500h_10000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,5,3,75,102,73.52941176470588
+mfcc_lstm_model_500h_10000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,5,3,40,40,100.0
+mfcc_lstm_model_500h_10000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,5,3,35,62,56.451612903225815
+mfcc_lstm_model_500h_10000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,7,5,78,102,76.47058823529412
+mfcc_lstm_model_500h_10000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,7,5,40,40,100.0
+mfcc_lstm_model_500h_10000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,7,5,38,62,61.29032258064516
+mfcc_lstm_model_500h_10000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói tổng hợp,0,10,7,80,102,78.43137254901961
+mfcc_lstm_model_500h_10000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để train,0,10,7,39,40,97.5
+mfcc_lstm_model_500h_10000epochs_specaug_8batch_3stacks_cpu.pt,Data Tiếng nói để điều khiển nhà,0,10,7,41,62,66.12903225806451
