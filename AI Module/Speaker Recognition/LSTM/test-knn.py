@@ -5,18 +5,12 @@ import time
 import inference
 import myconfig
 import csv
-from sklearn.cluster import KMeans
-from collections import defaultdict
-
-# Hàm để tạo cụm cho mỗi người
-def get_clusters(base_embedding_vectors):
-    kmeans = KMeans(n_clusters=K_CLUSTERS, random_state=0, n_init=10).fit(base_embedding_vectors)
-    return kmeans.cluster_centers_
+from collections import defaultdict, Counter
 
 start_time = time.time()
 
-N_TAKEN_VIDEOS = 10
-K_CLUSTERS = N_TAKEN_VIDEOS if N_TAKEN_VIDEOS < 5 else 5
+N_TAKEN_VIDEOS = 5 #Best: 10 Should: 2 (Best: 93%, Should: 92%, Each audio: 20s)
+K_NEAREST_NEIGHBOUR = 3# N_TAKEN_VIDEOS if N_TAKEN_VIDEOS < 5 else 5  #Best: 2 Should 2  (Best: 93%, Should: 92%, Each audio: 20s)
 
 # Load pre-trained encoder
 encoder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\saved_model\train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu\mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"
@@ -45,64 +39,55 @@ print(len(dat_base_embedding_vectors), len(dat_base_embedding_vectors[0]))
 print(len(tuan_base_embedding_vectors), len(tuan_base_embedding_vectors[0]))
 
 
-# Tạo cụm cho mỗi người
-tri_clusters = get_clusters(tri_base_embedding_vectors)
-phat_clusters = get_clusters(phat_base_embedding_vectors)
-dat_clusters = get_clusters(dat_base_embedding_vectors)
-tuan_clusters = get_clusters(tuan_base_embedding_vectors)
+speaker_embedding_vector = defaultdict(lambda: "")
+embedding_vectors_data = []
 
-print("Tri clusters:", len(tri_clusters), len(tri_clusters[0]))
-print("Phat clusters:", len(phat_clusters), len(phat_clusters[0]))
-print("Dat clusters:", len(dat_clusters), len(dat_clusters[0]))
-print("Tuan clusters:", len(tuan_clusters), len(tuan_clusters[0]))
-
-
-speaker_cluster = defaultdict(lambda: "")
-clusters_data = []
-
-for cluster in tri_clusters:
-    speaker_cluster[tuple(cluster)] = "Trí"
-    clusters_data.append(cluster)
-for cluster in phat_clusters:
-    speaker_cluster[tuple(cluster)] = "Phát"
-    clusters_data.append(cluster)
-for cluster in dat_clusters:
-    speaker_cluster[tuple(cluster)] = "Đạt"
-    clusters_data.append(cluster)
-for cluster in tuan_clusters:
-    speaker_cluster[tuple(cluster)] = "Tuấn"
-    clusters_data.append(cluster)
-
-print(len(clusters_data), len(clusters_data[0]))
+for vector in tri_base_embedding_vectors:
+    speaker_embedding_vector[tuple(vector)] = "Trí"
+    embedding_vectors_data.append(vector)
+for vector in phat_base_embedding_vectors:
+    speaker_embedding_vector[tuple(vector)] = "Phát"
+    embedding_vectors_data.append(vector)
+for vector in dat_base_embedding_vectors:
+    speaker_embedding_vector[tuple(vector)] = "Đạt"
+    embedding_vectors_data.append(vector)
+for vector in tuan_base_embedding_vectors:
+    speaker_embedding_vector[tuple(vector)] = "Tuấn"
+    embedding_vectors_data.append(vector)
 
 
-data_source = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\Data Tiếng nói tổng hợp"
+    
+    
+DATA_SOURCE = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\Data Tiếng nói tổng hợp"
 
 total_prediction = 0 
 accurate_prediction = 0
 
-for user in os.listdir(data_source):
-    user_folder_path = os.path.join(data_source, user)
-    for audio_file in os.listdir(user_folder_path):
-        audio_file_path = os.path.join(user_folder_path, audio_file)
+for speaker in os.listdir(DATA_SOURCE):
+    speaker_folder_path = os.path.join(DATA_SOURCE, speaker)
+    # Duyệt qua từng file âm thanh của người này
+    for audio_file in os.listdir(speaker_folder_path):
+        audio_file_path = os.path.join(speaker_folder_path, audio_file)
         
+        # Nhúng file âm thanh
         audio_file_embedding = inference.get_embedding(audio_file_path, encoder)
         
-        cluster_distance = defaultdict(lambda: 0)
-        for cluster in clusters_data:
-            cluster_distance[tuple(cluster)] = inference.compute_distance(cluster, audio_file_embedding)
-            
-        min_distance = min(cluster_distance.values())
-        for cluster in clusters_data:
-            if inference.compute_distance(cluster, audio_file_embedding) == min_distance:
-                prediction = speaker_cluster[tuple(cluster)]
-                break
+        # Tính khoảng cách giữa file âm thanh và các vector nhúng
+        embedding_vector_distance = [(vector, inference.compute_distance(vector, audio_file_embedding)) for vector in embedding_vectors_data]
+        
+        # Sắp xếp các vector nhúng theo khoảng cách tăng dần
+        sorted_embedding_vector_distance = sorted(embedding_vector_distance, key=lambda pair: pair[1])
+        
+        # Dự đoán người nói sử dụng KNN
+        speaker_predictions = [speaker_embedding_vector[tuple(vector)] for vector, distance in sorted_embedding_vector_distance[:K_NEAREST_NEIGHBOUR]]
 
-        if user == prediction:
-            print(f"\033[94mSpeaker: {user} Predict: {prediction} [TRUE]\033[0m")
+        prediction = Counter(speaker_predictions).most_common(1)[0][0]        
+
+        if speaker == prediction:
+            print(f"\033[94mSpeaker: {speaker} Predict: {prediction} [TRUE]\033[0m")
             accurate_prediction += 1
         else:
-            print(f"\033[91mSpeaker: {user} Predict: {prediction} [FALSE]\033[0m")
+            print(f"\033[91mSpeaker: {speaker} Predict: {prediction} [FALSE]\033[0m")
         
         total_prediction += 1
 
