@@ -1,0 +1,95 @@
+
+Tôi/NOUN muốn/VERB Mở/VERB cửa/NOUN trong/ADP phòng/NOUN khách/NOUN
+Tôi/NOUN muốn/VERB Bật/VERB đèn/NOUN trong/ADP phòng/NOUN khách/NOUN
+Tôi/NOUN muốn/VERB Tắt/VERB đèn/NOUN trong/ADP phòng/NOUN khách/NOUN
+Tôi/NOUN muốn/VERB Bật/VERB đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN con_cái/NOUN
+Tôi/NOUN muốn/VERB Tắt/VERB đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN con_cái/NOUN
+Tôi/NOUN muốn/VERB Mở/VERB cửa/NOUN ở/ADP phòng/NOUN ngủ/NOUN con_cái/NOUN
+Tôi/NOUN muốn/VERB Bật/VERB đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN ba/NOUN mẹ/NOUN
+Tôi/NOUN muốn/VERB Tắt/VERB đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN ba/NOUN mẹ/NOUN
+Tôi/NOUN muốn/VERB Mở/VERB cửa/NOUN ở/ADP phòng/NOUN ngủ/NOUN ba/NOUN mẹ/NOUN
+Tôi/NOUN muốn/VERB Xem/VERB nhiệt_độ/NOUN độ_ẩm/NOUN trong/ADP phòng/NOUN bếp/NOUN
+Tôi/NOUN muốn/VERB Tắt/VERB đèn/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Tôi/NOUN muốn/VERB Bật/VERB đèn/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Tôi/NOUN muốn/VERB Mở/VERB cửa/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Tôi/NOUN muốn/VERB Mở/VERB cửa_cuốn/NOUN trong/ADP garage/NOUN
+Tôi/NOUN muốn/VERB Đóng/VERB cửa_cuốn/NOUN trong/ADP garage/NOUN
+Tôi/NOUN muốn/VERB Bật/VERB đèn/NOUN ở/ADP garage/NOUN
+Tôi/NOUN muốn/VERB Tắt/VERB đèn/NOUN ở/ADP garage/NOUN
+Tôi/NOUN muốn/VERB mở/VERB cửa/NOUN trong/ADP phòng/NOUN khách/NOUN
+Tôi/NOUN muốn/VERB bật/VERB đèn/NOUN trong/ADP phòng/NOUN khách/NOUN
+Tôi/NOUN muốn/VERB tắt/VERB đèn/NOUN trong/ADP phòng/NOUN khách/NOUN
+Tôi/NOUN muốn/VERB bật/VERB đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN con_cái/NOUN
+Tôi/NOUN muốn/VERB tắt/VERB đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN con_cái/NOUN
+Tôi/NOUN muốn/VERB mở/VERB cửa/NOUN ở/ADP phòng/NOUN ngủ/NOUN con_cái/NOUN
+Tôi/NOUN muốn/VERB bật/VERB đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN ba/NOUN mẹ/NOUN
+Tôi/NOUN muốn/VERB tắt/VERB đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN ba/NOUN mẹ/NOUN
+Tôi/NOUN muốn/VERB mở/VERB cửa/NOUN ở/ADP phòng/NOUN ngủ/NOUN ba/NOUN mẹ/NOUN
+Tôi/NOUN muốn/VERB Xem/VERB nhiệt_độ/NOUN độ_ẩm/NOUN trong/ADP phòng/NOUN bếp/NOUN
+Tôi/NOUN muốn/VERB tắt/VERB đèn/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Tôi/NOUN muốn/VERB bật/VERB đèn/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Tôi/NOUN muốn/VERB mở/VERB cửa/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Tôi/NOUN muốn/VERB mở_cửa_cuốn/VERB trong/ADP garage/NOUN
+Tôi/NOUN muốn/VERB đóng/VERB cửa_cuốn/NOUN trong/ADP garage/NOUN
+Tôi/NOUN muốn/VERB bật/VERB đèn/NOUN ở/ADP garage/NOUN
+Tôi/NOUN muốn/VERB tắt/VERB đèn/NOUN ở/ADP garage/NOUN
+tôi/NOUN muốn/VERB mở/VERB cửa/NOUN trong/ADP phòng/NOUN khách/NOUN
+tôi/NOUN muốn/VERB bật/VERB đèn/NOUN trong/ADP phòng/NOUN khách/NOUN
+tôi/NOUN muốn/VERB tắt/VERB đèn/NOUN trong/ADP phòng/NOUN khách/NOUN
+tôi/NOUN muốn/VERB bật/VERB đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN con_cái/NOUN
+tôi/NOUN muốn/VERB tắt/VERB đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN con_cái/NOUN
+tôi/NOUN muốn/VERB mở/VERB cửa/NOUN ở/ADP phòng/NOUN ngủ/NOUN con_cái/NOUN
+tôi/NOUN muốn/VERB bật/VERB đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN ba/NOUN mẹ/NOUN
+tôi/NOUN muốn/VERB tắt/VERB đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN ba/NOUN mẹ/NOUN
+tôi/NOUN muốn/VERB mở/VERB cửa/NOUN ở/ADP phòng/NOUN ngủ/NOUN ba/NOUN mẹ/NOUN
+tôi/NOUN muốn/VERB tắt/VERB đèn/NOUN ở/ADP phòng/NOUN bếp/NOUN
+tôi/NOUN muốn/VERB bật/VERB đèn/NOUN ở/ADP phòng/NOUN bếp/NOUN
+tôi/NOUN muốn/VERB mở/VERB cửa/NOUN ở/ADP phòng/NOUN bếp/NOUN
+tôi/NOUN muốn/VERB mở/VERB cửa_cuốn/NOUN trong/ADP garage/NOUN
+tôi/NOUN muốn/VERB đóng/VERB cửa_cuốn/NOUN trong/ADP garage/NOUN
+tôi/NOUN muốn/VERB bật/VERB đèn/NOUN ở/ADP garage/NOUN
+tôi/NOUN muốn/VERB tắt/VERB đèn/NOUN ở/ADP garage/NOUN
+Mở/VERB cửa_sổ/NOUN trong/ADP phòng/NOUN khách/NOUN
+Đóng/VERB rèm_cửa/NOUN trong/ADP phòng/NOUN khách/NOUN
+Tăng/VERB độ_sáng/NOUN đèn/NOUN trong/ADP phòng/NOUN khách/NOUN
+Giảm/VERB độ_sáng/NOUN đèn/NOUN trong/ADP phòng/NOUN khách/NOUN
+Mở/VERB cửa_sổ/NOUN ở/ADP phòng/NOUN ngủ/NOUN con_cái/NOUN
+Đóng/VERB rèm_cửa/NOUN ở/ADP phòng/NOUN ngủ/NOUN con_cái/NOUN
+Tăng/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN con_cái/NOUN
+Giảm/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN con_cái/NOUN
+Mở/VERB cửa_sổ/NOUN ở/ADP phòng/NOUN ngủ/NOUN ba/NOUN mẹ/NOUN
+Đóng/VERB rèm_cửa/NOUN ở/ADP phòng/NOUN ngủ/NOUN ba/NOUN mẹ/NOUN
+Tăng/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN ba/NOUN mẹ/NOUN
+Giảm/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN ba/NOUN mẹ/NOUN
+Mở/VERB cửa_sổ/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Đóng/VERB rèm_cửa/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Tăng/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Giảm/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Mở/VERB cửa_sổ/NOUN trong/ADP garage/NOUN
+Đóng/VERB cửa_cuốn/NOUN trong/ADP garage/NOUN
+Tăng/VERB độ_sáng/NOUN đèn/NOUN trong/ADP garage/NOUN
+Giảm/VERB độ_sáng/NOUN đèn/NOUN trong/ADP garage/NOUN
+Mở/VERB cửa_sổ/NOUN ở/ADP phòng/NOUN làm_việc/NOUN
+Đóng/VERB rèm_cửa/NOUN ở/ADP phòng/NOUN làm_việc/NOUN
+Tăng/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN làm_việc/NOUN
+Giảm/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN làm_việc/NOUN
+Mở/VERB cửa_sổ/NOUN ở/ADP phòng/NOUN ngủ/NOUN khách/NOUN
+Đóng/VERB rèm_cửa/NOUN ở/ADP phòng/NOUN ngủ/NOUN khách/NOUN
+Tăng/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN khách/NOUN
+Giảm/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN khách/NOUN
+Mở/VERB cửa_sổ/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Đóng/VERB cửa/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Tăng/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Giảm/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN bếp/NOUN
+Mở/VERB cửa_sổ/NOUN ở/ADP phòng/NOUN ngủ/NOUN trẻ_em/NOUN
+Đóng/VERB rèm_cửa/NOUN ở/ADP phòng/NOUN ngủ/NOUN trẻ_em/NOUN
+Tăng/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN trẻ_em/NOUN
+Giảm/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN ngủ/NOUN trẻ_em/NOUN
+Mở/VERB cửa_sổ/NOUN ở/ADP nhà/NOUN vệ_sinh/NOUN
+Đóng/VERB cửa/NOUN ở/ADP nhà/NOUN vệ_sinh/NOUN
+Tăng/VERB độ_sáng/NOUN đèn/NOUN ở/ADP nhà/NOUN vệ_sinh/NOUN
+Giảm/VERB độ_sáng/NOUN đèn/NOUN ở/ADP nhà/NOUN vệ_sinh/NOUN
+Mở/VERB cửa_sổ/NOUN ở/ADP phòng/NOUN khách/NOUN
+Đóng/VERB rèm_cửa/NOUN ở/ADP phòng/NOUN khách/NOUN
+Tăng/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN khách/NOUN
+Giảm/VERB độ_sáng/NOUN đèn/NOUN ở/ADP phòng/NOUN khách/NOUN
