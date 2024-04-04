@@ -2,7 +2,7 @@ import subprocess
 import os
 import tensorflow as tf
 
-DATASET_AUDIO_PATH = 'D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\Data Tiếng nói tổng hợp'  # Hãy thay thế bằng đường dẫn thực tế của dữ liệu
+DATASET_AUDIO_PATH = 'D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\Data Tiếng nói base'  # Hãy thay thế bằng đường dẫn thực tế của dữ liệu
 SAMPLING_RATE = 16000
 
 def convert_sample_rate(input_path, output_path, target_sample_rate=16000):

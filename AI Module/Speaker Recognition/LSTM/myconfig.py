@@ -31,7 +31,7 @@ N_MFCC = 40
 # Size of LSTM hidden layers
 LSTM_HIDDEN_SIZE = 64
 # Number of LSTM layers stacked on top of each other
-LSTM_NUM_LAYERS = 4
+LSTM_NUM_LAYERS = 3
 # Whether to use bidirectional LSTM or not
 BI_LSTM = True
 # Method of aggregating frames, whether it's mean or not
