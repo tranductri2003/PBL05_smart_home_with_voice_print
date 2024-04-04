@@ -51,7 +51,7 @@ SPEAKERS = [
     "Phát"
 ]
 
-csv_file_path = "statistic-test-models.csv"
+csv_file_path = "statistic-test-models-single-audio-file.csv"
 
 data = [("Model", "Test Dataset", "EER-Threshold", "Accurate Prediction", "Total Prediction", "Percentage")]
 
@@ -109,4 +109,4 @@ with open(csv_file_path, mode='w', newline='') as file:
     writer = csv.writer(file)
     writer.writerows(data)
 
-print("CSV file 'statistic-train-models.csv' has been created successfully.")
+print("CSV file 'statistic-train-models-single-audio-file.csv' has been created successfully.")

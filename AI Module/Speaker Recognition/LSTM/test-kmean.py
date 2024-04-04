@@ -15,8 +15,8 @@ def get_clusters(base_embedding_vectors):
 
 start_time = time.time()
 
-N_TAKEN_VIDEOS = 2 #Best: 10 Should: 2 (Best: 93%, Should: 92%, Each audio: 20s)
-K_CLUSTERS = 2# N_TAKEN_VIDEOS if N_TAKEN_VIDEOS < 5 else 5  #Best: 2 Should 2  (Best: 93%, Should: 92%, Each audio: 20s)
+N_TAKEN_AUDIO = 2 #Best: 10 Should: 2 (Best: 93%, Should: 92%, Each audio: 20s)
+K_CLUSTERS = 2# N_TAKEN_AUDIO if N_TAKEN_AUDIO < 5 else 5  #Best: 2 Should 2  (Best: 93%, Should: 92%, Each audio: 20s)
 
 # Load pre-trained encoder
 encoder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\saved_model\train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu\mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"
@@ -28,10 +28,10 @@ phat_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_an
 dat_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\Data Tiếng nói base\Đạt"
 tuan_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker Recognition\LSTM\Data Tiếng nói base\Tuấn"
 
-tri_audio_files = [file for file in os.listdir(tri_folder_path)[:N_TAKEN_VIDEOS] if file.endswith(".wav")]
-phat_audio_files = [file for file in os.listdir(phat_folder_path)[:N_TAKEN_VIDEOS] if file.endswith(".wav")]
-dat_audio_files = [file for file in os.listdir(dat_folder_path)[:N_TAKEN_VIDEOS] if file.endswith(".wav")]
-tuan_audio_files = [file for file in os.listdir(tuan_folder_path)[:N_TAKEN_VIDEOS] if file.endswith(".wav")]
+tri_audio_files = [file for file in os.listdir(tri_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
+phat_audio_files = [file for file in os.listdir(phat_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
+dat_audio_files = [file for file in os.listdir(dat_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
+tuan_audio_files = [file for file in os.listdir(tuan_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
 
 
 tri_base_embedding_vectors = [inference.get_embedding(os.path.join(tri_folder_path, audio), encoder) for audio in tri_audio_files]
