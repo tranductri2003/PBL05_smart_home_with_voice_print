@@ -15,3 +15,4 @@ def speech2text(wav_file):
     model = pipeline('automatic-speech-recognition', model='vinai/PhoWhisper-base', device=DEVICE)
     return model(wav_file)['text']
 
+
