@@ -1,46 +1,51 @@
-import os
-from collections import defaultdict, Counter
-import Speaker_Recognition.neural_net
-import Speaker_Recognition.inference
-import Speaker_Recognition.myconfig
-import Speaker_Recognition.dataset
-import Speaker_Recognition.feature_extraction
-import Speaker_Recognition.specaug
-import time
 import pyaudio
 import wave
 import RPi.GPIO as GPIO
 import librosa
 import soundfile as sf
+
+import os
+import torch
+import neural_net
+import time
+import inference
+import myconfig
+import csv
+
 import subprocess
-from pydub import AudioSegment
-
-from db_helper import Member, Appliance, Permission, query_members, query_appliances, query_permissions, connect_db
-from utils import convert_to_16000_sampling_rate
 
 
-        
+# Load pre-trained encoder
+encoder_path = r"/home/tranductri2003/Code/speaker-recognition-using-lstm/saved_model/train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu/mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"
+encoder = neural_net.get_speaker_encoder(encoder_path)
 
-    
-ENCODER_PATH = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\IOT\Speaker_Recognition\saved_model\train-clean-360-hours-50000-epochs-specaug-8-batch-4-stacks-cpu"   
-ENCODER = Speaker_Recognition.neural_net.get_speaker_encoder(ENCODER_PATH)
 
-SPEAKER_RESAMPLED_DATA_PATH = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\audio_resampled_data"
-DB_PATH = r"D:\\Code\\BachKhoa\\PBL 5\\PBL05_smart_home_with_voice_print_and_antifraud_ai\\BackEnd\\db.sqlite3"
-CONN = connect_db(DB_PATH)
+tri_base_embedding = inference.get_embedding(r"/home/tranductri2003/Code/speaker-recognition-using-lstm/Data Tiếng nói base/Trí/tri_1.wav", encoder)
+dat_base_embedding = inference.get_embedding(r"/home/tranductri2003/Code/speaker-recognition-using-lstm/Data Tiếng nói base/Đạt/DAT_1.wav", encoder)
+tuan_base_embedding = inference.get_embedding(r"/home/tranductri2003/Code/speaker-recognition-using-lstm/Data Tiếng nói base/Tuấn/tuan_0.wav", encoder)
+phat_base_embedding = inference.get_embedding(r"/home/tranductri2003/Code/speaker-recognition-using-lstm/Data Tiếng nói base/Phát/phat_1.wav", encoder)
 
-N_TAKEN_AUDIO = 5
-K_NEAREST_NEIGHBOURS = 5
+
+import pyaudio
+import wave
+import RPi.GPIO as GPIO
+import librosa
+import soundfile as sf
+
+import subprocess
+
+
+# Load pre-trained encoder
+encoder_path = r"/home/tranductri2003/Code/speaker-recognition-using-lstm/saved_model/train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu/mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"
+encoder = neural_net.get_speaker_encoder(encoder_path)
 
 # Thiết lập các tham số ghi âm
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
 CHUNK = 512 
-RAW_RECORDING_PATH = "./temp_recorded_audio/recording.wav"
-RESAMPLED_RECORDING_PATH = "./temp_recorded_audio/recording_resampled.wav"
+WAVE_OUTPUT_FILENAME = "recording.wav"
 RESAMPLED_RATE = 16000  # Tần số lấy mẫu mới
-
 
 SERVO_PIN = 26
 
@@ -70,6 +75,9 @@ def control_servo():
     time.sleep(0.5)  # Chờ 0.5 giây
     set_angle(0)  # Quay servo về góc 0 độ
     
+def convert_sample_rate(input_path, output_path, target_sample_rate=16000):
+    command = ['ffmpeg', '-hide_banner', '-loglevel', 'panic', '-y', '-i', input_path, '-ar', str(target_sample_rate), output_path]
+    subprocess.run(command, check=True)
     
 # Khai báo chân GPIO cho servo
 def record_audio():
@@ -93,61 +101,60 @@ def record_audio():
     stream.close()
 
     # Lưu âm thanh vào file WAV
-    with wave.open(RAW_RECORDING_PATH, 'wb') as wf:
-        RESAMPLED_RECORDING_PATH = "./temp_recorded_audio/recording_resampled.wav"
-    
+    with wave.open(WAVE_OUTPUT_FILENAME, 'wb') as wf:
         wf.setnchannels(CHANNELS)
         wf.setsampwidth(audio.get_sample_size(FORMAT))
         wf.setframerate(RATE)
         wf.writeframes(b''.join(frames))
 
-    
-    convert_to_16000_sampling_rate(RAW_RECORDING_PATH, RESAMPLED_RECORDING_PATH)
+    # Đọc âm thanh từ file ghi âm
+    y, sr = librosa.load(WAVE_OUTPUT_FILENAME, sr=None)
 
-    
-    sound = AudioSegment.from_file(RESAMPLED_RECORDING_PATH, format="wav")
-    duplicated_sound = sound * 5  # Tạo 5 bản sao và ghép chúng lại
-    duplicated_sound.export(RESAMPLED_RECORDING_PATH, format="wav")    
-    
-    
-    
-    
-    members = query_members(CONN)
-    appliances = query_appliances(CONN)
-    permissions = query_permissions(CONN)
-    
-    speaker_folder_path = defaultdict(lambda: "")
-    for member in members:
-        speaker_folder_path[member.name] = os.path.join(SPEAKER_RESAMPLED_DATA_PATH, member.name)
-        
-    speaker_audio_files = defaultdict(list)
-    for member in members:
-        speaker_audio_files[member.name] = [file for file in os.listdir(speaker_folder_path[member.name])]
-        
-    speaker_base_embedding_vectors = defaultdict(list)
-    for member in members:
-        speaker_base_embedding_vectors[member.name] = [Speaker_Recognition.inference.get_embedding(os.path.join(speaker_folder_path[member.name], audio), ENCODER) for audio in speaker_audio_files[member.name]]
-        
-    print(len(speaker_base_embedding_vectors[members[0].name]), len(speaker_base_embedding_vectors[members[0].name][0]))
-        
-    speaker_embedding_vector = defaultdict(lambda: "")
-    embedding_vectors_data = []
-    
-    for member in members:
-        for vector in speaker_base_embedding_vectors[member.name]:
-            speaker_embedding_vector[tuple(vector)] = member.name
-            embedding_vectors_data.append(vector)
-    
-    
-    
-    audio_file_path = RESAMPLED_RECORDING_PATH
-    audio_file_embedding = Speaker_Recognition.inference.get_embedding(audio_file_path)
-    
-    embedding_vector_distance = [(vector, Speaker_Recognition.inference.compute_distance(vector, audio_file_embedding)) for vector in embedding_vectors_data]
-    sorted_embedding_vector_distance = sorted(embedding_vector_distance, key=lambda pair: pair[1])
+    # Đường dẫn của tập tin ghi âm ban đầu
+    input_path = 'recording.wav'
+    # Đường dẫn của tập tin sau khi resample
+    output_path = 'resampled_recording.wav'
 
-    speaker_predictions = [speaker_embedding_vector[tuple(vector)] for vector, distance in sorted_embedding_vector_distance[:K_NEAREST_NEIGHBOURS]]
+    # Chuyển đổi tần số lấy mẫu của tệp ghi âm
+    convert_sample_rate(input_path, output_path, RESAMPLED_RATE)
 
-    prediction = Counter(speaker_predictions).most_common(1)[0][0]        
+    # Đọc âm thanh từ tệp resampled
+    y_resampled, sr_resampled = librosa.load(output_path, sr=None)
 
-    print(speaker_predictions)
+    # Ghi âm thanh resampled vào file mới
+    sf.write(output_path, y_resampled, RESAMPLED_RATE)
+
+    audio_file_path = output_path
+    
+    audio_file_embedding = inference.get_embedding(audio_file_path, encoder)
+    
+    tri_distance = inference.compute_distance(tri_base_embedding, audio_file_embedding)
+    dat_distance = inference.compute_distance(dat_base_embedding, audio_file_embedding)
+    tuan_distance = inference.compute_distance(tuan_base_embedding, audio_file_embedding)
+    phat_distance = inference.compute_distance(phat_base_embedding, audio_file_embedding)
+    
+    data_distance = []
+    data_distance.append(tri_distance)
+    data_distance.append(dat_distance)
+    data_distance.append(tuan_distance)
+    data_distance.append(phat_distance)
+
+    users = ["Trí", "Đạt", "Tuấn", "Phát"]
+    prediction = users[data_distance.index(min(data_distance))]
+    
+    print(f"Nhận diện được: {prediction}")
+    
+    if prediction == "Phát":
+        control_servo()
+
+
+try:
+    while True:
+        if GPIO.input(14) == GPIO.LOW: # Nếu nút bấm được nhấn
+            record_audio()
+except KeyboardInterrupt:
+    pass
+finally:
+    # Dọn dẹp GPIO và PyAudio
+    GPIO.cleanup()
+    audio.terminate()
