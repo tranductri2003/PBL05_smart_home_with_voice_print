@@ -21,7 +21,7 @@ NUM_PROCESSES = min(multiprocessing.cpu_count(), BATCH_SIZE)
 TRAINING_STEPS = 100
 
 # Use transformer instead of LSTM
-USE_TRANSFORMER = True
+USE_TRANSFORMER = False
 # Set the device to be used (cuda if available, otherwise cpu)
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # DEVICE = "cpu"
@@ -54,7 +54,7 @@ SPECAUG_TIME_MASK_MAX_WIDTH = SEQ_LEN // 5
 TRIPLET_ALPHA = 0.1
 
 # If true, use transformer instead of LSTM
-USE_TRANSFORMER = True
+USE_TRANSFORMER = False
 # Size of layers in the transformer
 TRANSFORMER_DIM = 32
 # Number of encoder layers for the transformer
