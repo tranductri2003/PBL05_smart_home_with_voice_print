@@ -101,7 +101,7 @@ record_audio("recorded_audio.wav", duration=3, sample_rate=44100, target_sample_
 current_directory = os.path.dirname(__file__)
 audio_file_path = os.path.join(current_directory, "recorded_audio.wav")
 
-sounds = [AudioSegment.from_file(audio_file_path, format="wav") for _ in range(10)]
+sounds = [AudioSegment.from_file(audio_file_path, format="wav") for _ in range(20)]
 combined = sum(sounds)
 
 file_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker_Recognition\LSTM"
