@@ -8,11 +8,13 @@ def ensure_dir(file_path):
     if not os.path.exists(directory):
         os.makedirs(directory)
         
-def convert_to_16000_sampling_rate(input_path, output_path):
+
+def convert_sample_rate(input_path, output_path, target_sample_rate=16000):
     ensure_dir(output_path)  # Đảm bảo thư mục đầu ra tồn tại
     sound = AudioSegment.from_file(input_path)
-    sound = sound.set_frame_rate(16000)
+    sound = sound.set_frame_rate(target_sample_rate)
     sound.export(output_path, format="wav")
+
 
 def member_audio_directory_path(instance, filename):
     # Trả về đường dẫn lưu trữ file cho từng thành viên
@@ -39,7 +41,7 @@ class MemberFile(models.Model):
         resampled_audio_path = os.path.join('audio_resampled_data', str(self.member.name), file_name)
         
         # Resample audio
-        convert_to_16000_sampling_rate(raw_audio_path, resampled_audio_path)
+        convert_sample_rate(raw_audio_path, resampled_audio_path, 16000)
         
         # Nếu muốn ghép nối nhiều bản sao của âm thanh:
         sound = AudioSegment.from_file(resampled_audio_path, format="wav")
