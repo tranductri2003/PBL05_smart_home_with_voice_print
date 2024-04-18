@@ -1,5 +1,6 @@
-import subprocess
+from pydub import AudioSegment
 
 def convert_sample_rate(input_path, output_path, target_sample_rate=16000):
-    command = ['ffmpeg', '-hide_banner', '-loglevel', 'panic', '-y', '-i', input_path, '-ar', str(target_sample_rate), output_path]
-    subprocess.run(command, check=True)
+    sound = AudioSegment.from_file(input_path)
+    sound = sound.set_frame_rate(target_sample_rate)
+    sound.export(output_path, format="wav")

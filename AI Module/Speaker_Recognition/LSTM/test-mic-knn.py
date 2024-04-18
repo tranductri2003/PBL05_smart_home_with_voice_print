@@ -9,8 +9,6 @@ import sounddevice as sd
 import numpy as np
 import scipy.io.wavfile as wav
 from scipy.signal import resample
-import subprocess
-import tensorflow as tf
 from collections import defaultdict, Counter
 from pydub import AudioSegment
 
@@ -19,28 +17,27 @@ K_NEAREST_NEIGHBOURS = 5# N_TAKEN_AUDIO if N_TAKEN_AUDIO < 5 else 5  #Best: 2 Sh
 
 
 def convert_sample_rate(input_path, output_path, target_sample_rate=16000):
-    command = ['ffmpeg', '-hide_banner', '-loglevel', 'panic', '-y', '-i', input_path, '-ar', str(target_sample_rate), output_path]
-    subprocess.run(command, check=True)
+    sound = AudioSegment.from_file(input_path)
+    sound = sound.set_frame_rate(target_sample_rate)
+    sound.export(output_path, format="wav")
     
-    
-def record_audio(file_name, duration, sample_rate=44100, target_sample_rate=16000, repetitions=5):
-    # Lấy đường dẫn thư mục hiện hành của file mã nguồn
+def record_audio(file_name, duration, sample_rate=44100, target_sample_rate=16000):
     current_directory = os.path.dirname(__file__)
-    # Kết hợp đường dẫn của thư mục hiện hành với tên file để tạo đường dẫn đầy đủ
     file_path = os.path.join(current_directory, file_name)
 
     print("Recording...")
-    audio_data = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype=np.int16)
+    audio_data = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype=np.int16)  # channels=1 để ghi âm kênh mono
     sd.wait()
     print("Recording finished.")
 
-    # Nối và sao chép nội dung ghi âm để lặp lại đoạn ghi âm
-    repeated_audio_data = np.tile(audio_data, repetitions)
-    print("Length of repeated_audio_data:", len(repeated_audio_data) / sample_rate, "seconds")  # In ra độ dài của repeated_audio_data theo giây
-
     # Lưu file âm thanh vào thư mục hiện hành với tần số lấy mẫu mới
-    wav.write(file_path, sample_rate, repeated_audio_data)
-    
+    wav.write(file_path, sample_rate, audio_data)
+
+    # Chuyển đổi sang kênh mono nếu cần
+    if audio_data.shape[1] > 1:  # Kiểm tra xem âm thanh có nhiều hơn một kênh không
+        mono_audio_data = np.mean(audio_data, axis=1, dtype=np.int16)  # Lấy trung bình của tất cả các kênh
+        wav.write(file_path, sample_rate, mono_audio_data)
+
     # Lưu tạm thời tệp đã chuyển đổi
     temp_path = file_path + '.temp.wav'
     convert_sample_rate(file_path, temp_path, target_sample_rate)
@@ -55,15 +52,15 @@ encoder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_an
 encoder = neural_net.get_speaker_encoder(encoder_path)
 
 
-# tri_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\audio_resampled_data\Trần Đức Trí"
-# phat_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\audio_resampled_data\Phạm Nguyễn Anh Phát"
-# dat_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\audio_resampled_data\Lê Văn Tiến Đạt"
-# tuan_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\audio_resampled_data\Lê Anh Tuấn"
+tri_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\audio_resampled_data\Trần Đức Trí"
+phat_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\audio_resampled_data\Phạm Nguyễn Anh Phát"
+dat_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\audio_resampled_data\Lê Văn Tiến Đạt"
+tuan_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\audio_resampled_data\Lê Anh Tuấn"
 
-tri_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker_Recognition\LSTM\Data hôm nay\Trí"
-phat_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker_Recognition\LSTM\Data hôm nay\Phát"
-dat_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker_Recognition\LSTM\Data hôm nay\Đạt"
-tuan_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker_Recognition\LSTM\Data hôm nay\Tuấn"
+# tri_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker_Recognition\LSTM\Data hôm nay\Trí"
+# phat_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker_Recognition\LSTM\Data hôm nay\Phát"
+# dat_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker_Recognition\LSTM\Data hôm nay\Đạt"
+# tuan_folder_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker_Recognition\LSTM\Data hôm nay\Tuấn"
 
 
 tri_audio_files = [file for file in os.listdir(tri_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
@@ -100,21 +97,12 @@ for vector in tuan_base_embedding_vectors:
 
 
 # Ghi âm trong 5 giây và lưu vào file "recorded_audio.wav"
-record_audio("recorded_audio.wav", duration=3, repetitions=10)
+record_audio("recorded_audio.wav", duration=3, sample_rate=44100, target_sample_rate=16000)
 current_directory = os.path.dirname(__file__)
 audio_file_path = os.path.join(current_directory, "recorded_audio.wav")
 
-sound1 = AudioSegment.from_file(audio_file_path, format="wav")
-sound2 = AudioSegment.from_file(audio_file_path, format="wav")
-sound3 = AudioSegment.from_file(audio_file_path, format="wav")
-sound4 = AudioSegment.from_file(audio_file_path, format="wav")
-sound5 = AudioSegment.from_file(audio_file_path, format="wav")
-sound6 = AudioSegment.from_file(audio_file_path, format="wav")
-sound7 = AudioSegment.from_file(audio_file_path, format="wav")
-sound8 = AudioSegment.from_file(audio_file_path, format="wav")
-sound9 = AudioSegment.from_file(audio_file_path, format="wav")
-sound10 = AudioSegment.from_file(audio_file_path, format="wav")
-combined = sound1 + sound2 + sound3 + sound4 + sound5 + sound6 + sound7 + sound8 + sound9 + sound10
+sounds = [AudioSegment.from_file(audio_file_path, format="wav") for _ in range(10)]
+combined = sum(sounds)
 
 file_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker_Recognition\LSTM"
 file_handle = combined.export(os.path.join(file_path, "audio-combined.wav"), format="wav")
