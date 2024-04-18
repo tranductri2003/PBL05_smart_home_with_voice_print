@@ -16,7 +16,7 @@ import subprocess
 from pydub import AudioSegment
 
 from db_helper import Member, Appliance, Permission, query_members, query_appliances, query_permissions, connect_db
-from utils import convert_to_16000_sampling_rate
+from utils import convert_sample_rate
 
 
         
@@ -102,7 +102,7 @@ def record_audio():
         wf.writeframes(b''.join(frames))
 
     
-    convert_to_16000_sampling_rate(WAVE_OUTPUT_RAW_FILENAME, WAVE_OUTPUT_RESAMPLED_FILENAME)
+    convert_sample_rate(WAVE_OUTPUT_RAW_FILENAME, WAVE_OUTPUT_RESAMPLED_FILENAME, 16000)
 
     
     sound = AudioSegment.from_file(WAVE_OUTPUT_RESAMPLED_FILENAME, format="wav")
