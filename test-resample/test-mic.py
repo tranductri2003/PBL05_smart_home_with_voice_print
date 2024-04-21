@@ -1,7 +1,7 @@
 import pyaudio
 import wave
 
-def record_audio(filename, duration=9, framerate=44100, chunk=1024, channels=1, rate=44100):
+def record_audio(filename, duration=9, framerate=44100, chunk=512, channels=1, rate=44100):
     p = pyaudio.PyAudio()
 
     stream = p.open(format=pyaudio.paInt16,
