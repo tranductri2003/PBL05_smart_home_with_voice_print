@@ -57,3 +57,10 @@ def query_permissions(conn):
     cursor.execute("SELECT * FROM permissions_permission")
     permissions = [Permission(*row) for row in cursor.fetchall()]
     return permissions
+
+# conn = connect_db("D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\db.sqlite3")
+# appliances = query_appliances(conn)
+
+# print("Danh sách các thiết bị trong nhà:")
+# for appliance in appliances:
+#     print(appliance)
