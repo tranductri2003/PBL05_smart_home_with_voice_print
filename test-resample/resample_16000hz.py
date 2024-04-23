@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-DATASET_AUDIO_PATH = r'D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker_Recognition\LSTM\Data Tiếng nói base\Tuấn_2'  # Hãy thay thế bằng đường dẫn thực tế của dữ liệu
+DATASET_AUDIO_PATH = r'/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-resample/[Raspberry] Recording'  # Hãy thay thế bằng đường dẫn thực tế của dữ liệu
 SAMPLING_RATE = 16000
 
 def convert_sample_rate(input_path, output_path, target_sample_rate=16000):

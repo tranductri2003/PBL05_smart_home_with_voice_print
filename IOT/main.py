@@ -22,7 +22,7 @@ from utils import convert_sample_rate
         
 
     
-ENCODER_PATH = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/Speaker_Recognition/saved_model/train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu/mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"   
+ENCODER_PATH = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/saved_model/train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu/mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"   
 ENCODER = neural_net.get_speaker_encoder(ENCODER_PATH)
 
 DB_PATH = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/BackEnd/db.sqlite3"
@@ -40,8 +40,8 @@ RAW_RECORDING_PATH = "/home/tranductri2003/Code/PBL05_smart_home_with_voice_prin
 RESAMPLED_RECORDING_PATH = "/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/BackEnd/audio_resampled_data"
 RESAMPLED_RATE = 16000  # Tần số lấy mẫu mới
 
-WAVE_OUTPUT_RAW_FILENAME = r"./temp_recorded_audio/recording_raw.wav"
-WAVE_OUTPUT_RESAMPLED_FILENAME = r"./temp_recorded_audio/recording_resampled.wav"
+WAVE_OUTPUT_RAW_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_raw.wav"
+WAVE_OUTPUT_RESAMPLED_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_resampled.wav"
 
 SERVO_PIN = 24
 

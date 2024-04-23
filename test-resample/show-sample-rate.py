@@ -1,7 +1,7 @@
 import soundfile as sf
 
 # Đường dẫn đến file âm thanh
-tri_file = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-resample/[Raspberry] [Trí] So sánh CPU và GPU.wav.wav"
+tri_file = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-resample/[Raspberry] Recording/Tuấn/[Raspberry] [Tuấn] Hoang tưởng được yêu.wav"
 phat_file = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\test-resample\resample-phat.mp3"
 
 # Đọc file âm thanh và lấy thông tin
