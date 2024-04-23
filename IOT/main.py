@@ -38,6 +38,7 @@ RATE = 44100
 CHUNK = 512 
 RAW_RECORDING_PATH = "/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/BackEnd/audio_raw_data"
 RESAMPLED_RECORDING_PATH = "/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/BackEnd/audio_resampled_data"
+# RASPBERRY_RECORDING_PATH = "/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-resample/[Raspberry] Recording"
 RESAMPLED_RATE = 16000  # Tần số lấy mẫu mới
 
 WAVE_OUTPUT_RAW_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_raw.wav"

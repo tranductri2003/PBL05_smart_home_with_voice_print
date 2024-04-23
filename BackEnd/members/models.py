@@ -1,6 +1,8 @@
 from django.db import models
 import os
 from pydub import AudioSegment
+import subprocess
+
 
 # Đảm bảo rằng đường dẫn đến các thư mục tồn tại
 def ensure_dir(file_path):
@@ -8,13 +10,11 @@ def ensure_dir(file_path):
     if not os.path.exists(directory):
         os.makedirs(directory)
         
-
 def convert_sample_rate(input_path, output_path, target_sample_rate=16000):
     ensure_dir(output_path)  # Đảm bảo thư mục đầu ra tồn tại
-    sound = AudioSegment.from_file(input_path)
-    sound = sound.set_frame_rate(target_sample_rate)
-    sound.export(output_path, format="wav")
-
+    command = ['ffmpeg', '-hide_banner', '-loglevel', 'panic', '-y', '-i', input_path, '-ar', str(target_sample_rate), output_path]
+    subprocess.run(command, check=True)
+    
 
 def member_audio_directory_path(instance, filename):
     # Trả về đường dẫn lưu trữ file cho từng thành viên
