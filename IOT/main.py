@@ -18,8 +18,8 @@ from pydub import AudioSegment
 from db_helper import Member, Appliance, Permission, query_members, query_appliances, query_permissions, connect_db
 from utils import convert_sample_rate
 
-
-        
+from Electronic_Devices.servo import ServoController
+from Electronic_Devices.motor import MotorController
 
     
 ENCODER_PATH = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/saved_model/train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu/mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"   
@@ -44,7 +44,6 @@ RESAMPLED_RATE = 16000  # Tần số lấy mẫu mới
 WAVE_OUTPUT_RAW_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_raw.wav"
 WAVE_OUTPUT_RESAMPLED_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_resampled.wav"
 
-SERVO_PIN = 24
 
 # Khởi tạo PyAudio
 audio = pyaudio.PyAudio()
@@ -52,27 +51,8 @@ audio = pyaudio.PyAudio()
 # Khởi tạo GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(14, GPIO.IN, pull_up_down=GPIO.PUD_UP) # GPIO 14 là chân được kết nối với nút bấm
-GPIO.setup(SERVO_PIN, GPIO.OUT)
 
-# Khai báo đối tượng PWM
-pwm = GPIO.PWM(SERVO_PIN, 50)  # 50Hz (chu kỳ 20ms) là tần số tiêu chuẩn cho servo
 
-def set_angle(angle):
-    duty = angle / 18 + 2  # Chuyển đổi góc sang chu kỳ
-    GPIO.output(SERVO_PIN, True)
-    pwm.ChangeDutyCycle(duty)
-    time.sleep(1)
-    GPIO.output(SERVO_PIN, False)
-    pwm.ChangeDutyCycle(0)
-
-# Hàm để kiểm soát servo khi nhận diện được "Phát"
-def control_servo():
-    pwm.start(0)  # Khởi động PWM
-    set_angle(90)  # Quay servo 90 độ
-    time.sleep(0.5)  # Chờ 0.5 giây
-    set_angle(0)  # Quay servo về góc 0 độ
-    
-    
 # Khai báo chân GPIO cho servo
 def record_audio():
     # Bắt đầu ghi âm
@@ -152,13 +132,61 @@ def record_audio():
     prediction = Counter(speaker_predictions).most_common(1)[0][0]        
 
     print(prediction)
+    
+    
 
     if prediction == "Phạm Nguyễn Anh Phát" or prediction == "Lê Anh Tuấn":
-        control_servo()
+        # Thiết lập chân GPIO
+        ENABLE_PIN = 23
+        IN1_PIN = 24
+        IN2_PIN = 25
+        SPEED = 50  # Tốc độ quay (từ 0 đến 100)
+
+        # Tạo đối tượng điều khiển động cơ
+        motor = MotorController(ENABLE_PIN, IN1_PIN, IN2_PIN)
+
+        try:
+            # Chạy động cơ tiến với tốc độ SPEED
+            motor.forward(SPEED)
+            time.sleep(2)  # Chạy trong 2 giây
+
+            # Dừng động cơ
+            motor.stop()
+            time.sleep(1)  # Dừng trong 1 giây
+
+            # Chạy động cơ lùi với tốc độ SPEED
+            motor.backward(SPEED)
+            time.sleep(2)  # Chạy trong 2 giây
+
+            # Dừng động cơ
+            motor.stop()
+
+        except KeyboardInterrupt:
+            # Dừng động cơ khi người dùng nhấn Ctrl+C
+            motor.stop()
+            GPIO.cleanup()  # Dọn dẹp GPIO
+
+        finally:
+            # Dọn dẹp GPIO khi kết thúc chương trình
+            GPIO.cleanup()
+    elif prediction == "Trần Đức Trí":
+        door_controller = ServoController(pin=15)
+        # Open and close the door
+        door_controller.open_door(0)
+        time.sleep(3)  # Keep the door open for 3 seconds
+        door_controller.close_door(110)
+    elif prediction == "Lê Văn Tiến Đạt":
+        door_controller = ServoController(pin=18)
+        # Open and close the door
+        door_controller.open_door(0)
+        time.sleep(3)  # Keep the door open for 3 seconds
+        door_controller.close_door(110)
 
 try:
     while True:
+        print("COME HERE")
         if GPIO.input(14) == GPIO.LOW: # Nếu nút bấm được nhấn
+            print("COME THEN")
             record_audio()
 except KeyboardInterrupt:
     pass
