@@ -10,12 +10,9 @@ BASE_DIR = os.path.dirname(os.getcwd())
 ENCODER_PATH = os.path.join(BASE_DIR, "AI Module", "Speaker_Recognition", "LSTM", "saved_model", "train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu", "saved_model_20240324123652.ckpt-50000.pt")
 
 def convert_audio_to_vector(ENCODER_PATH, audio_file_path):
-
     ENCODER = neural_net.get_speaker_encoder(ENCODER_PATH)
-    
-    audio_file_embedding = inference.get_embedding(audio_file_path, ENCODER)
 
-    # Giả sử hàm này trích xuất đặc trưng từ file âm thanh và trả về một list chứa các float
+    audio_file_embedding = inference.get_embedding(audio_file_path, ENCODER)
     return audio_file_embedding  # Thay thế bằng code AI của bạn
 
 # Đảm bảo rằng đường dẫn đến các thư mục tồn tại

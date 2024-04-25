@@ -17,7 +17,7 @@ from pydub import AudioSegment
 import torch
 from transformers import pipeline
 
-from db_helper import Member, Appliance, Permission, query_members, query_appliances, query_permissions, connect_db
+from db_helper import Member, Appliance, Permission, query_members, query_appliances, query_permissions, query_member_files, get_features, connect_db
 from utils import convert_sample_rate, speech2text, extract_action_and_device
 
 from Electronic_Devices.servo import ServoController
@@ -41,8 +41,6 @@ CHANNELS = 1
 RATE = 44100
 CHUNK = 512 
 RAW_RECORDING_PATH = "/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/BackEnd/audio_raw_data"
-RESAMPLED_RECORDING_PATH = "/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/BackEnd/audio_resampled_data"
-# RASPBERRY_RECORDING_PATH = "/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-resample/[Raspberry] Recording"
 RESAMPLED_RATE = 16000  # Tần số lấy mẫu mới
 
 WAVE_OUTPUT_RAW_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_raw.wav"
@@ -91,7 +89,7 @@ def record_audio():
 
     
     sound = AudioSegment.from_file(WAVE_OUTPUT_RESAMPLED_FILENAME, format="wav")
-    duplicated_sound = sound * 10  # Tạo 5 bản sao và ghép chúng lại
+    duplicated_sound = sound * 30
     duplicated_sound.export(WAVE_OUTPUT_RESAMPLED_FILENAME, format="wav")    
     
     
@@ -101,20 +99,14 @@ def record_audio():
     for permission in permissions:
         check_permission[permission.member_name][permission.appliance_name] = True
     
-    speaker_folder_path = defaultdict(lambda: "")
-    for member in members:
-        speaker_folder_path[member.name] = os.path.join(RESAMPLED_RECORDING_PATH, member.name)
+
         
-    speaker_audio_files = defaultdict(list)
-    for member in members:
-        speaker_audio_files[member.name] = [file for file in os.listdir(speaker_folder_path[member.name])]
+
         
     speaker_base_embedding_vectors = defaultdict(list)
     for member in members:
-        speaker_base_embedding_vectors[member.name] = [inference.get_embedding(os.path.join(speaker_folder_path[member.name], audio), SPEAKER_RECOGNITION_MODEL) for audio in speaker_audio_files[member.name]]
-        
-    print(len(speaker_base_embedding_vectors[members[0].name]), len(speaker_base_embedding_vectors[members[0].name][0]))
-        
+        speaker_base_embedding_vectors[member.name] = [get_features(vector['features']) for vector in query_member_files(CONN, member.name)]
+                
     speaker_embedding_vector = defaultdict(lambda: "")
     embedding_vectors_data = []
     
