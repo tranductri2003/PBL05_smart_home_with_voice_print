@@ -21,6 +21,8 @@ class MemberFileInline(admin.TabularInline):
     model = MemberFile
     formset = LimitFileInlineFormSet
     extra = 1  # Số form mặc định hiển thị là 1
+    #fields = ['member', 'file', 'features']  # Thêm trường 'features' vào danh sách các trường hiển thị
+    #readonly_fields = ['features']  # Đặt trường 'features' là chỉ đọc nếu bạn không muốn cho phép chỉnh sửa từ admin
 
 class MemberAdmin(admin.ModelAdmin):
     inlines = [MemberFileInline]
