@@ -65,20 +65,40 @@ def query_permissions(conn):
     permissions = [Permission(*row) for row in cursor.fetchall()]
     return permissions
 
-# conn = connect_db("/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/BackEnd/db.sqlite3")
-# appliances = query_appliances(conn)
-# permissions = query_permissions(conn)
-# members = query_members(conn)
+def query_member_files(conn):
+    cursor = conn.cursor()
+    cursor.execute("""
+    SELECT mf.member_id, mf.file, mf.features, mm.name
+    FROM members_memberfile mf
+    JOIN members_member mm ON mf.member_id = mm.id
+    """)
+    member_files = [{
+        'member_id': row[0],
+        'file_path': row[1],
+        'features': row[2],
+        'member_name': row[3]
+    } for row in cursor.fetchall()]
+    return member_files
 
-# print("Danh sách các thành viên trong nhà:")
-# for member in members:
-#     print(member.name)
 
-# print("Danh sách các thiết bị trong nhà:")
-# for appliance in appliances:
-#     print(appliance.name)
+conn = connect_db("D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\db.sqlite3")
+appliances = query_appliances(conn)
+permissions = query_permissions(conn)
+members = query_members(conn)
 
-# print("Danh sách các quyền điều khiển:")
-# for permission in permissions:
-#     print(f"{permission.member_name} có quyền điều khiển {permission.appliance_name}")
+print("Danh sách các thành viên trong nhà:")
+for member in members:
+    print(member.name)
+
+print("Danh sách các thiết bị trong nhà:")
+for appliance in appliances:
+    print(appliance.name)
+
+print("Danh sách các quyền điều khiển:")
+for permission in permissions:
+    print(f"{permission.member_name} có quyền điều khiển {permission.appliance_name}")
     
+member_files = query_member_files(conn)
+print("Danh sách các vector của thành viên:")
+for file in member_files:
+    print(f"Member: {file['member_name']} - File: {file['file_path']} - Features: {file['features']}")
