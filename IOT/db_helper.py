@@ -19,15 +19,16 @@ class Appliance:
         return f"Appliance(ID: {self.id}, Name: {self.name}, Description: {self.description})"
 
 class Permission:
-    def __init__(self, id, member_id, appliance_id):
+    def __init__(self, id, member_id, appliance_id, member_name=None, appliance_name=None):
         self.id = id
         self.member_id = member_id
         self.appliance_id = appliance_id
+        self.member_name = member_name
+        self.appliance_name = appliance_name
 
     def __str__(self):
-        return f"Permission(ID: {self.id}, Member ID: {self.member_id}, Appliance ID: {self.appliance_id})"
-    
-    
+        return f"Permission(ID: {self.id}, Member: {self.member_name}, Appliance: {self.appliance_name})"
+
     
 def connect_db(db_path):
     """ Tạo kết nối đến cơ sở dữ liệu SQLite được chỉ định bởi db_path """
@@ -52,15 +53,32 @@ def query_appliances(conn):
 
 def query_permissions(conn):
     cursor = conn.cursor()
+
+    # Truy vấn liên kết ba bảng để lấy thông tin cần thiết
+    cursor.execute("""
+    SELECT p.id, p.member_id, p.appliance_id, m.name as member_name, a.name as appliance_name
+    FROM permissions_permission p
+    JOIN members_member m ON p.member_id = m.id
+    JOIN appliances_appliance a ON p.appliance_id = a.id
+    """)
     
-    # Truy vấn dữ liệu từ bảng Permission và tạo các đối tượng Permission
-    cursor.execute("SELECT * FROM permissions_permission")
     permissions = [Permission(*row) for row in cursor.fetchall()]
     return permissions
 
-# conn = connect_db("D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\db.sqlite3")
+# conn = connect_db("/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/BackEnd/db.sqlite3")
 # appliances = query_appliances(conn)
+# permissions = query_permissions(conn)
+# members = query_members(conn)
+
+# print("Danh sách các thành viên trong nhà:")
+# for member in members:
+#     print(member.name)
 
 # print("Danh sách các thiết bị trong nhà:")
 # for appliance in appliances:
-#     print(appliance)
+#     print(appliance.name)
+
+# print("Danh sách các quyền điều khiển:")
+# for permission in permissions:
+#     print(f"{permission.member_name} có quyền điều khiển {permission.appliance_name}")
+    

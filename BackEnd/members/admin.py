@@ -24,5 +24,6 @@ class MemberFileInline(admin.TabularInline):
 
 class MemberAdmin(admin.ModelAdmin):
     inlines = [MemberFileInline]
+    list_display = ['id', 'name', 'about']  # Hiển thị trường 'id', 'name', 'about' trong danh sách thành viên
 
 admin.site.register(Member, MemberAdmin)

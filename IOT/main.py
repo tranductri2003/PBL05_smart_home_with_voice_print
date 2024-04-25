@@ -18,7 +18,7 @@ import torch
 from transformers import pipeline
 
 from db_helper import Member, Appliance, Permission, query_members, query_appliances, query_permissions, connect_db
-from utils import convert_sample_rate, speech2text
+from utils import convert_sample_rate, speech2text, extract_action_and_device
 
 from Electronic_Devices.servo import ServoController
 from Electronic_Devices.motor import MotorController
@@ -145,7 +145,16 @@ def record_audio():
     print(end_time - start_time)
     print(content)
     
-
+    action, device = extract_action_and_device(content)
+    print(f"Action: {action} Device: {device}")
+    
+    print("Trong database")
+    for appliance in appliances:
+        print(appliance.name)
+    
+    for permission in permissions:
+        print(permission.member_id, permission.appliance_id)
+        
     # if prediction == "Phạm Nguyễn Anh Phát" or prediction == "Lê Anh Tuấn":
     #     # Thiết lập chân GPIO
     #     ENABLE_PIN = 23
