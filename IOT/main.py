@@ -24,7 +24,7 @@ from Electronic_Devices.servo import ServoController
 from Electronic_Devices.motor import MotorController
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-SPEECH_RECOGNITION_MODEl = pipeline('automatic-speech-recognition', model='vinai/PhoWhisper-tiny', device=DEVICE)
+SPEECH_RECOGNITION_MODEl = pipeline('automatic-speech-recognition', model='vinai/PhoWhisper-base', device=DEVICE)
     
 SPEAKER_RECOGNITION_MODEL_PATH = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/saved_model/train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu/mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"   
 SPEAKER_RECOGNITION_MODEL = neural_net.get_speaker_encoder(SPEAKER_RECOGNITION_MODEL_PATH)
@@ -72,12 +72,12 @@ def record_audio():
         data = stream.read(CHUNK)
         frames.append(data)
 
-    print("Finished recording.")
-
     # Dừng ghi âm
     stream.stop_stream()
     stream.close()
-
+    
+    print("Finished recording.")
+    
     # Lưu âm thanh vào file WAV
     with wave.open(WAVE_OUTPUT_RAW_FILENAME, 'wb') as wf:
     
@@ -95,11 +95,11 @@ def record_audio():
     duplicated_sound.export(WAVE_OUTPUT_RESAMPLED_FILENAME, format="wav")    
     
     
-    
-    
     members = query_members(CONN)
-    appliances = query_appliances(CONN)
     permissions = query_permissions(CONN)
+    check_permission = defaultdict(lambda: defaultdict(lambda: False))
+    for permission in permissions:
+        check_permission[permission.member_name][permission.appliance_name] = True
     
     speaker_folder_path = defaultdict(lambda: "")
     for member in members:
@@ -133,9 +133,9 @@ def record_audio():
 
     speaker_predictions = [speaker_embedding_vector[tuple(vector)] for vector, distance in sorted_embedding_vector_distance[:K_NEAREST_NEIGHBOURS]]
     print(speaker_predictions)
-    prediction = Counter(speaker_predictions).most_common(1)[0][0]        
+    predicted_speaker = Counter(speaker_predictions).most_common(1)[0][0]        
 
-    print(prediction)
+    print(predicted_speaker)
     
     import time
     
@@ -148,12 +148,12 @@ def record_audio():
     action, device = extract_action_and_device(content)
     print(f"Action: {action} Device: {device}")
     
-    print("Trong database")
-    for appliance in appliances:
-        print(appliance.name)
+    if check_permission[predicted_speaker][device] == True:
+        print(f"{predicted_speaker} có quyền")
+    else:
+        print(f"{predicted_speaker} đéo có quyền")
+
     
-    for permission in permissions:
-        print(permission.member_id, permission.appliance_id)
         
     # if prediction == "Phạm Nguyễn Anh Phát" or prediction == "Lê Anh Tuấn":
     #     # Thiết lập chân GPIO
