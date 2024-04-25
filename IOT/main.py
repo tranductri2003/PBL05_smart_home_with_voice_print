@@ -14,16 +14,20 @@ import librosa
 import soundfile as sf
 import subprocess
 from pydub import AudioSegment
+import torch
+from transformers import pipeline
 
 from db_helper import Member, Appliance, Permission, query_members, query_appliances, query_permissions, connect_db
-from utils import convert_sample_rate
+from utils import convert_sample_rate, speech2text
 
 from Electronic_Devices.servo import ServoController
 from Electronic_Devices.motor import MotorController
 
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+SPEECH_RECOGNITION_MODEl = pipeline('automatic-speech-recognition', model='vinai/PhoWhisper-tiny', device=DEVICE)
     
-ENCODER_PATH = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/saved_model/train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu/mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"   
-ENCODER = neural_net.get_speaker_encoder(ENCODER_PATH)
+SPEAKER_RECOGNITION_MODEL_PATH = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/saved_model/train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu/mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"   
+SPEAKER_RECOGNITION_MODEL = neural_net.get_speaker_encoder(SPEAKER_RECOGNITION_MODEL_PATH)
 
 DB_PATH = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/BackEnd/db.sqlite3"
 CONN = connect_db(DB_PATH)
@@ -107,7 +111,7 @@ def record_audio():
         
     speaker_base_embedding_vectors = defaultdict(list)
     for member in members:
-        speaker_base_embedding_vectors[member.name] = [inference.get_embedding(os.path.join(speaker_folder_path[member.name], audio), ENCODER) for audio in speaker_audio_files[member.name]]
+        speaker_base_embedding_vectors[member.name] = [inference.get_embedding(os.path.join(speaker_folder_path[member.name], audio), SPEAKER_RECOGNITION_MODEL) for audio in speaker_audio_files[member.name]]
         
     print(len(speaker_base_embedding_vectors[members[0].name]), len(speaker_base_embedding_vectors[members[0].name][0]))
         
@@ -122,7 +126,7 @@ def record_audio():
     
     
     audio_file_path = WAVE_OUTPUT_RESAMPLED_FILENAME
-    audio_file_embedding = inference.get_embedding(audio_file_path, ENCODER)
+    audio_file_embedding = inference.get_embedding(audio_file_path, SPEAKER_RECOGNITION_MODEL)
     
     embedding_vector_distance = [(vector, inference.compute_distance(vector, audio_file_embedding)) for vector in embedding_vectors_data]
     sorted_embedding_vector_distance = sorted(embedding_vector_distance, key=lambda pair: pair[1])
@@ -133,60 +137,65 @@ def record_audio():
 
     print(prediction)
     
+    import time
+    
+    start_time = time.time()
+    content = speech2text(WAVE_OUTPUT_RAW_FILENAME, SPEECH_RECOGNITION_MODEl)
+    end_time = time.time()
+    print(end_time - start_time)
+    print(content)
     
 
-    if prediction == "Phạm Nguyễn Anh Phát" or prediction == "Lê Anh Tuấn":
-        # Thiết lập chân GPIO
-        ENABLE_PIN = 23
-        IN1_PIN = 24
-        IN2_PIN = 25
-        SPEED = 50  # Tốc độ quay (từ 0 đến 100)
+    # if prediction == "Phạm Nguyễn Anh Phát" or prediction == "Lê Anh Tuấn":
+    #     # Thiết lập chân GPIO
+    #     ENABLE_PIN = 23
+    #     IN1_PIN = 24
+    #     IN2_PIN = 25
+    #     SPEED = 50  # Tốc độ quay (từ 0 đến 100)
 
-        # Tạo đối tượng điều khiển động cơ
-        motor = MotorController(ENABLE_PIN, IN1_PIN, IN2_PIN)
+    #     # Tạo đối tượng điều khiển động cơ
+    #     motor = MotorController(ENABLE_PIN, IN1_PIN, IN2_PIN)
 
-        try:
-            # Chạy động cơ tiến với tốc độ SPEED
-            motor.forward(SPEED)
-            time.sleep(2)  # Chạy trong 2 giây
+    #     try:
+    #         # Chạy động cơ tiến với tốc độ SPEED
+    #         motor.forward(SPEED)
+    #         time.sleep(2)  # Chạy trong 2 giây
 
-            # Dừng động cơ
-            motor.stop()
-            time.sleep(1)  # Dừng trong 1 giây
+    #         # Dừng động cơ
+    #         motor.stop()
+    #         time.sleep(1)  # Dừng trong 1 giây
 
-            # Chạy động cơ lùi với tốc độ SPEED
-            motor.backward(SPEED)
-            time.sleep(2)  # Chạy trong 2 giây
+    #         # Chạy động cơ lùi với tốc độ SPEED
+    #         motor.backward(SPEED)
+    #         time.sleep(2)  # Chạy trong 2 giây
 
-            # Dừng động cơ
-            motor.stop()
+    #         # Dừng động cơ
+    #         motor.stop()
 
-        except KeyboardInterrupt:
-            # Dừng động cơ khi người dùng nhấn Ctrl+C
-            motor.stop()
-            GPIO.cleanup()  # Dọn dẹp GPIO
+    #     except KeyboardInterrupt:
+    #         # Dừng động cơ khi người dùng nhấn Ctrl+C
+    #         motor.stop()
+    #         GPIO.cleanup()  # Dọn dẹp GPIO
 
-        finally:
-            # Dọn dẹp GPIO khi kết thúc chương trình
-            GPIO.cleanup()
-    elif prediction == "Trần Đức Trí":
-        door_controller = ServoController(pin=15)
-        # Open and close the door
-        door_controller.open_door(0)
-        time.sleep(3)  # Keep the door open for 3 seconds
-        door_controller.close_door(110)
-    elif prediction == "Lê Văn Tiến Đạt":
-        door_controller = ServoController(pin=18)
-        # Open and close the door
-        door_controller.open_door(0)
-        time.sleep(3)  # Keep the door open for 3 seconds
-        door_controller.close_door(110)
+    #     finally:
+    #         # Dọn dẹp GPIO khi kết thúc chương trình
+    #         GPIO.cleanup()
+    # elif prediction == "Trần Đức Trí":
+    #     door_controller = ServoController(pin=15)
+    #     # Open and close the door
+    #     door_controller.open_door(0)
+    #     time.sleep(3)  # Keep the door open for 3 seconds
+    #     door_controller.close_door(110)
+    # elif prediction == "Lê Văn Tiến Đạt":
+    #     door_controller = ServoController(pin=18)
+    #     # Open and close the door
+    #     door_controller.open_door(0)
+    #     time.sleep(3)  # Keep the door open for 3 seconds
+    #     door_controller.close_door(110)
 
 try:
     while True:
-        print("COME HERE")
         if GPIO.input(14) == GPIO.LOW: # Nếu nút bấm được nhấn
-            print("COME THEN")
             record_audio()
 except KeyboardInterrupt:
     pass
