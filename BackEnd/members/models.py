@@ -72,7 +72,6 @@ class MemberFile(models.Model):
         duplicated_sound = sound * 5  # Tạo 5 bản sao và ghép chúng lại
         duplicated_sound.export(resampled_audio_path, format="wav")
         if not self.features:
-            print("aaa")
             # Chỉ xử lý nếu chưa có vector
             extracted_features = convert_audio_to_vector(ENCODER_PATH, resampled_audio_path)
             features_list = extracted_features.tolist() if isinstance(extracted_features, np.ndarray) else extracted_features
