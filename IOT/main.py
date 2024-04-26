@@ -52,7 +52,7 @@ audio = pyaudio.PyAudio()
 
 # Khởi tạo GPIO
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(14, GPIO.IN, pull_up_down=GPIO.PUD_UP) # GPIO 14 là chân được kết nối với nút bấm
+GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP) # GPIO 26 là chân được kết nối với nút bấm
 
 
 # Khai báo chân GPIO cho servo
@@ -66,7 +66,7 @@ def record_audio():
 
     frames = []
 
-    while GPIO.input(14) == GPIO.LOW: # Ghi âm khi nút bấm được nhấn
+    while GPIO.input(26) == GPIO.LOW: # Ghi âm khi nút bấm được nhấn
         data = stream.read(CHUNK)
         frames.append(data)
 
@@ -142,6 +142,8 @@ def record_audio():
     
     if check_permission[predicted_speaker][device] == True:
         print(f"{predicted_speaker} có quyền")
+        motor = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=23, switch_pin_close=24)
+        motor.open_door_close_door(3)
     else:
         print(f"{predicted_speaker} đéo có quyền")
 
@@ -196,7 +198,7 @@ def record_audio():
 
 try:
     while True:
-        if GPIO.input(14) == GPIO.LOW: # Nếu nút bấm được nhấn
+        if GPIO.input(26) == GPIO.LOW: # Nếu nút bấm được nhấn
             record_audio()
 except KeyboardInterrupt:
     pass

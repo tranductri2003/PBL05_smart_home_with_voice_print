@@ -33,6 +33,12 @@ class ServoController:
         else:
             print("Error: Angle must be between 0 and 180 degrees.")
 
+    def open_door_close_door(self, angle, time_to_wait):
+        """Open and close door"""
+        self.open_door(angle)  # Adjust the door to angle degrees
+        time.sleep(time_to_wait)  # Keep the door open for 3 seconds
+        self.close_door(0)  # Close the door to an angle of 0 degrees
+        
     def cleanup(self):
         """Clean up GPIO and stop PWM when done using the controller."""
         self.servo.stop()
@@ -43,9 +49,7 @@ if __name__ == "__main__":
     door_controller = ServoController(pin=23)
     
     # Example of opening and closing the door
-    door_controller.open_door(110)  # Adjust the door to 110 degrees
-    time.sleep(3)  # Keep the door open for 3 seconds
-    door_controller.close_door(0)  # Close the door to an angle of 0 degrees
+    door_controller.open_door_close_door(110, 3)
 
     # Optionally set a custom angle
     # door_controller.custom_angle(90)  # Adjust the door to 90 degrees

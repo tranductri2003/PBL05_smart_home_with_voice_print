@@ -11,7 +11,7 @@ def speech2text(wav_file, model):
 # Function to extract action and device
 def extract_action_and_device(sentence):
     # Updated regular expression pattern
-    pattern = r"(mở|đóng|bật|tắt)\s+(cửa nhà xe|đèn nhà xe|cửa trượt phòng khách|đèn phòng khách|cửa phòng ngủ ba mẹ|đèn phòng ngủ ba mẹ|cửa phòng ngủ con cái|đèn phòng ngủ con cái|đèn phòng bếp)\b"
+    pattern = r"(mở|đóng|bật|tắt)\s+(cửa nhà xe|đèn nhà xe|cửa phòng khách|đèn phòng khách|cửa phòng ngủ ba mẹ|đèn phòng ngủ ba mẹ|cửa phòng ngủ con cái|đèn phòng ngủ con cái|đèn phòng bếp)\b"
 
     match = re.search(pattern, sentence)
     if match:
