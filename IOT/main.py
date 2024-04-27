@@ -133,14 +133,18 @@ def record_audio():
 
     print(predicted_speaker)
     
-    import time
-    
-    start_time = time.time()
     # content = speech2text(WAVE_OUTPUT_RAW_FILENAME, SPEECH_RECOGNITION_MODEl)
-    content = recognizer.recognize_google(WAVE_OUTPUT_RAW_FILENAME, language="vi-VN")
-    end_time = time.time()
-    print(end_time - start_time)
-    print(content)
+    with sr.AudioFile(WAVE_OUTPUT_RAW_FILENAME) as source:
+        # Lắng nghe và nhận dạng âm thanh
+        audio_data = recognizer.record(source)
+        try:
+            # Sử dụng Google Web Speech API để nhận dạng văn bản từ âm thanh
+            content = recognizer.recognize_google(audio_data, language="vi-VN")
+            print("Văn bản được nhận dạng: ", content)
+        except sr.UnknownValueError:
+            print("Không thể nhận dạng văn bản từ âm thanh.")
+        except sr.RequestError as e:
+            print("Lỗi trong quá trình gửi yêu cầu: ", e)
     
     action, device = extract_action_and_device(content)
     print(f"Action: {action} Device: {device}")
@@ -148,7 +152,7 @@ def record_audio():
     if check_permission[predicted_speaker][device] == True:
         print(f"{predicted_speaker} có quyền")
         motor = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=23, switch_pin_close=24)
-        motor.open_door_close_door(3)
+        # motor.open_door_close_door(3)
     else:
         print(f"{predicted_speaker} đéo có quyền")
 
