@@ -16,6 +16,8 @@ import subprocess
 from pydub import AudioSegment
 import torch
 from transformers import pipeline
+import speech_recognition as sr
+
 
 from db_helper import Member, Appliance, Permission, query_members, query_appliances, query_permissions, query_member_files, get_features, connect_db
 from utils import convert_sample_rate, speech2text, extract_action_and_device
@@ -46,6 +48,8 @@ RESAMPLED_RATE = 16000  # Tần số lấy mẫu mới
 WAVE_OUTPUT_RAW_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_raw.wav"
 WAVE_OUTPUT_RESAMPLED_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_resampled.wav"
 
+# Khởi tạo đối tượng Recognizer
+recognizer = sr.Recognizer()
 
 # Khởi tạo PyAudio
 audio = pyaudio.PyAudio()
@@ -132,7 +136,8 @@ def record_audio():
     import time
     
     start_time = time.time()
-    content = speech2text(WAVE_OUTPUT_RAW_FILENAME, SPEECH_RECOGNITION_MODEl)
+    # content = speech2text(WAVE_OUTPUT_RAW_FILENAME, SPEECH_RECOGNITION_MODEl)
+    content = recognizer.recognize_google(WAVE_OUTPUT_RAW_FILENAME, language="vi-VN")
     end_time = time.time()
     print(end_time - start_time)
     print(content)

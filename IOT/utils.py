@@ -23,24 +23,24 @@ def extract_action_and_device(sentence):
 
 
 """
-mở cửa cuốn nhà xe
-đóng cửa cuốn nhà xe
-bật đèn nhà xe
-tắt đèn nhà xe
+Tôi muốn mở cửa cuốn nhà xe
+Tôi muốn đóng cửa cuốn nhà xe
+Tôi muốn bật đèn nhà xe
+Tôi muốn tắt đèn nhà xe
 
-mở cửa trượt phòng khách
-bật đèn phòng khách
-tắt đèn phòng khách
+Tôi muốn mở cửa trượt phòng khách
+Tôi muốn bật đèn phòng khách
+Tôi muốn tắt đèn phòng khách
 
-mở cửa phòng ngủ ba mẹ
-bật đèn phòng ngủ ba mẹ
-tắt đèn phòng ngủ ba mẹ
+Tôi muốn mở cửa phòng ngủ ba mẹ
+Tôi muốn bật đèn phòng ngủ ba mẹ
+Tôi muốn tắt đèn phòng ngủ ba mẹ
 
-mở cửa phòng ngủ con cái
-bật đèn phòng ngủ con cái
-tắt đèn phòng ngủ con cái
+Tôi muốn mở cửa phòng ngủ con cái
+Tôi muốn bật đèn phòng ngủ con cái
+Tôi muốn tắt đèn phòng ngủ con cái
 
-bật đèn phòng bếp
-tắt đèn phòng bếp
+Tôi muốn bật đèn phòng bếp
+Tôi muốn tắt đèn phòng bếp
 """
 
