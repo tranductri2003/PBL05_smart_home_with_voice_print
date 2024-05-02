@@ -2,8 +2,8 @@ import RPi.GPIO as GPIO
 import time
 
 class StepperController:
-    def __init__(self, pins, steps_per_revolution=1024, delay=0.001):
-        self.StepPins = pins
+    def __init__(self, pin1, pin2, pin3, pin4, steps_per_revolution=1024, delay=0.001):
+        self.StepPins = [pin1, pin2, pin3, pin4]
         self.stepsPerRevolution = steps_per_revolution
         self.delay = delay
         self.Seq = [[1, 0, 0, 1],
@@ -38,18 +38,22 @@ class StepperController:
     def cleanup(self):
         GPIO.cleanup()
 
-# # Sử dụng lớp StepperController
-# if __name__ == "__main__":
-#     StepPins = [21, 20, 16, 12]  # Chân GPIO tương ứng với In1, In2, In3, In4
-#     stepper = StepperController(StepPins)
+# Sử dụng lớp StepperController
+if __name__ == "__main__":
+    pin1 = 21  # Chân GPIO tương ứng với In1
+    pin2 = 20  # Chân GPIO tương ứng với In2
+    pin3 = 16  # Chân GPIO tương ứng với In3
+    pin4 = 12  # Chân GPIO tương ứng với In4
+    
+    stepper = StepperController(pin1, pin2, pin3, pin4)
 
-#     while True:
-#         user_input = input("Enter 'open' to rotate forward, 'close' to rotate backward: ")
-#         if user_input == "open":
-#             stepper.rotate("forward", 3)
-#         elif user_input == "close":
-#             stepper.rotate("backward", 3)
-#         else:
-#             print("Invalid input!")
+    while True:
+        user_input = input("Enter 'open' to rotate forward, 'close' to rotate backward: ")
+        if user_input == "open":
+            stepper.rotate("forward", 3)
+        elif user_input == "close":
+            stepper.rotate("backward", 3)
+        else:
+            print("Invalid input!")
 
-#     stepper.cleanup()
+    stepper.cleanup()

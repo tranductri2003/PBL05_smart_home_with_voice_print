@@ -37,7 +37,7 @@ class ServoController:
         """Open and close door"""
         self.open_door(angle)  # Adjust the door to angle degrees
         time.sleep(time_to_wait)  # Keep the door open for 3 seconds
-        self.close_door(0)  # Close the door to an angle of 0 degrees
+        self.close_door(110)  # Close the door to an angle of 0 degrees
         
     def cleanup(self):
         """Clean up GPIO and stop PWM when done using the controller."""
@@ -45,14 +45,14 @@ class ServoController:
         GPIO.cleanup()
 
 # Example usage
-if __name__ == "__main__":
-    door_controller = ServoController(pin=23)
+# if __name__ == "__main__":
+#     door_controller = ServoController(pin=8)
     
-    # Example of opening and closing the door
-    door_controller.open_door_close_door(110, 3)
+#     # Example of opening and closing the door
+#     door_controller.open_door_close_door(0, 3)
 
-    # Optionally set a custom angle
-    # door_controller.custom_angle(90)  # Adjust the door to 90 degrees
+#     # Optionally set a custom angle
+#     # door_controller.custom_angle(90)  # Adjust the door to 90 degrees
 
-    # Cleanup GPIO and PWM
-    # door_controller.cleanup()
+#     # Cleanup GPIO and PWM
+#     door_controller.cleanup()

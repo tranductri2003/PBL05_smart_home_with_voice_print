@@ -95,7 +95,7 @@ def record_audio():
 
     
     sound = AudioSegment.from_file(WAVE_OUTPUT_RESAMPLED_FILENAME, format="wav")
-    duplicated_sound = sound * 30
+    duplicated_sound = sound * 50
     duplicated_sound.export(WAVE_OUTPUT_RESAMPLED_FILENAME, format="wav")    
     
     
@@ -137,7 +137,7 @@ def record_audio():
         audio_data = recognizer.record(source)
         try:
             # Sử dụng Google Web Speech API để nhận dạng văn bản từ âm thanh
-            content = recognizer.recognize_google(audio_data, language="vi-VN")
+            content = recognizer.recognize_google(audio_data, language="vi-VN").lower()
             print("Văn bản được nhận dạng: ", content)
         except sr.UnknownValueError:
             print("Không thể nhận dạng văn bản từ âm thanh.")
@@ -148,61 +148,25 @@ def record_audio():
     print(f"Action: {action} Device: {device}")
     
     if check_permission[predicted_speaker][device] == True:
-        print(f"{predicted_speaker} có quyền")
-        motor = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=23, switch_pin_close=24)
-        # motor.open_door_close_door(3)
-    else:
-        print(f"{predicted_speaker} đéo có quyền")
-
-    
+        print(f"\033[92m{predicted_speaker} có quyền\033[0m")
         
-    # if prediction == "Phạm Nguyễn Anh Phát" or prediction == "Lê Anh Tuấn":
-    #     # Thiết lập chân GPIO
-    #     ENABLE_PIN = 23
-    #     IN1_PIN = 24
-    #     IN2_PIN = 25
-    #     SPEED = 50  # Tốc độ quay (từ 0 đến 100)
-
-    #     # Tạo đối tượng điều khiển động cơ
-    #     motor = MotorController(ENABLE_PIN, IN1_PIN, IN2_PIN)
-
-    #     try:
-    #         # Chạy động cơ tiến với tốc độ SPEED
-    #         motor.forward(SPEED)
-    #         time.sleep(2)  # Chạy trong 2 giây
-
-    #         # Dừng động cơ
-    #         motor.stop()
-    #         time.sleep(1)  # Dừng trong 1 giây
-
-    #         # Chạy động cơ lùi với tốc độ SPEED
-    #         motor.backward(SPEED)
-    #         time.sleep(2)  # Chạy trong 2 giây
-
-    #         # Dừng động cơ
-    #         motor.stop()
-
-    #     except KeyboardInterrupt:
-    #         # Dừng động cơ khi người dùng nhấn Ctrl+C
-    #         motor.stop()
-    #         GPIO.cleanup()  # Dọn dẹp GPIO
-
-    #     finally:
-    #         # Dọn dẹp GPIO khi kết thúc chương trình
-    #         GPIO.cleanup()
-    # elif prediction == "Trần Đức Trí":
-    #     door_controller = ServoController(pin=15)
-    #     # Open and close the door
-    #     door_controller.open_door(0)
-    #     time.sleep(3)  # Keep the door open for 3 seconds
-    #     door_controller.close_door(110)
-    # elif prediction == "Lê Văn Tiến Đạt":
-    #     door_controller = ServoController(pin=18)
-    #     # Open and close the door
-    #     door_controller.open_door(0)
-    #     time.sleep(3)  # Keep the door open for 3 seconds
-    #     door_controller.close_door(110)
-
+        if device == "cửa phòng khách":
+            motor = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=4, switch_pin_close=24)
+            motor.open_door_close_door(3)
+        elif device == "cửa nhà xe":
+            stepper = StepperController(pin1=21, pin2=20, pin3=16, pin4=12)
+            if action == "mở":
+                stepper.rotate("forward", 3)
+            else:
+                stepper.rotate("backward", 3)
+        elif device == "cửa phòng ngủ con cái":
+            servo = ServoController(pin=7)
+            servo.open_door_close_door(0, 3)
+        elif device == "cửa phòng ngủ ba mẹ":
+            servo = ServoController(pin=8)
+            servo.open_door_close_door(0, 3)
+    else:
+        print(f"\033[91m{predicted_speaker} không có quyền có quyền\033[0m")
 try:
     while True:
         if GPIO.input(26) == GPIO.LOW: # Nếu nút bấm được nhấn
