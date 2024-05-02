@@ -24,9 +24,11 @@ from utils import convert_sample_rate, speech2text, extract_action_and_device
 
 from Electronic_Devices.servo import ServoController
 from Electronic_Devices.motor import MotorController
+from Electronic_Devices.stepper import StepperController
 
-DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-SPEECH_RECOGNITION_MODEl = pipeline('automatic-speech-recognition', model='vinai/PhoWhisper-base', device=DEVICE)
+
+# DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# SPEECH_RECOGNITION_MODEl = pipeline('automatic-speech-recognition', model='vinai/PhoWhisper-base', device=DEVICE)
     
 SPEAKER_RECOGNITION_MODEL_PATH = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/saved_model/train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu/mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"   
 SPEAKER_RECOGNITION_MODEL = neural_net.get_speaker_encoder(SPEAKER_RECOGNITION_MODEL_PATH)
@@ -104,9 +106,6 @@ def record_audio():
         check_permission[permission.member_name][permission.appliance_name] = True
     
 
-        
-
-        
     speaker_base_embedding_vectors = defaultdict(list)
     for member in members:
         speaker_base_embedding_vectors[member.name] = [get_features(vector['features']) for vector in query_member_files(CONN, member.name)]
@@ -133,7 +132,6 @@ def record_audio():
 
     print(predicted_speaker)
     
-    # content = speech2text(WAVE_OUTPUT_RAW_FILENAME, SPEECH_RECOGNITION_MODEl)
     with sr.AudioFile(WAVE_OUTPUT_RAW_FILENAME) as source:
         # Lắng nghe và nhận dạng âm thanh
         audio_data = recognizer.record(source)
