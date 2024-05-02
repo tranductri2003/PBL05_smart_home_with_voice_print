@@ -50,6 +50,11 @@ RESAMPLED_RATE = 16000  # Tần số lấy mẫu mới
 WAVE_OUTPUT_RAW_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_raw.wav"
 WAVE_OUTPUT_RESAMPLED_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_resampled.wav"
 
+# Số chân GPIO mà bạn muốn sử dụng
+pin = 27
+
+
+
 # Khởi tạo đối tượng Recognizer
 recognizer = sr.Recognizer()
 
@@ -60,6 +65,8 @@ audio = pyaudio.PyAudio()
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP) # GPIO 26 là chân được kết nối với nút bấm
 
+# Thiết lập chân GPIO là OUTPUT
+GPIO.setup(pin, GPIO.OUT)
 
 # Khai báo chân GPIO cho servo
 def record_audio():
@@ -95,7 +102,7 @@ def record_audio():
 
     
     sound = AudioSegment.from_file(WAVE_OUTPUT_RESAMPLED_FILENAME, format="wav")
-    duplicated_sound = sound * 50
+    duplicated_sound = sound * 5
     duplicated_sound.export(WAVE_OUTPUT_RESAMPLED_FILENAME, format="wav")    
     
     
@@ -165,6 +172,14 @@ def record_audio():
         elif device == "cửa phòng ngủ ba mẹ":
             servo = ServoController(pin=8)
             servo.open_door_close_door(0, 3)
+        elif device == "đèn phòng khách":
+            if action == "bật":
+                GPIO.output(pin, GPIO.HIGH) 
+            else:
+                GPIO.output(pin, GPIO.LOW) 
+
+                
+            
     else:
         print(f"\033[91m{predicted_speaker} không có quyền có quyền\033[0m")
 try:
