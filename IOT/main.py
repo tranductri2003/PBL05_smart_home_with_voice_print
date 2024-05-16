@@ -25,6 +25,9 @@ from utils import convert_sample_rate, speech2text, extract_action_and_device
 from Electronic_Devices.servo import ServoController
 from Electronic_Devices.motor import MotorController
 from Electronic_Devices.stepper import StepperController
+from Electronic_Devices.led import Led
+from Electronic_Devices.dht11 import DHTSensor
+from Electronic_Devices.api import API
 
 
 # DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -50,9 +53,30 @@ RESAMPLED_RATE = 16000  # Tần số lấy mẫu mới
 WAVE_OUTPUT_RAW_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_raw.wav"
 WAVE_OUTPUT_RESAMPLED_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_resampled.wav"
 
-# Số chân GPIO mà bạn muốn sử dụng
-pin = 27
+MAC_ADDRESS = "a0:a3:b3:ab:2e:10"
 
+motor = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=23, switch_pin_close=24)
+stepper = StepperController(pin1=21, pin2=20, pin3=16, pin4=12)
+servo_parent = ServoController(pin=7)
+servo_children = ServoController(pin=8)
+led_living = Led(4)
+led_kitchen = Led(17, 27)
+led_children = Led(10, 9)
+led_parent = Led(11)
+led_garage = Led(5, 6)
+dht = DHTSensor(13, 19, 26)
+api = API(MAC_ADDRESS)
+
+data = {
+    "Garage Led": 0,
+    "Garage Door": 0,
+    "Living Led": 0,
+    "Kitchen Led": 0,
+    "Parent Led": 0,
+    "Children Led": 0,
+    "Temperature": 0,
+    "Humidity": 0,
+}
 
 
 # Khởi tạo đối tượng Recognizer
@@ -65,8 +89,8 @@ audio = pyaudio.PyAudio()
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP) # GPIO 26 là chân được kết nối với nút bấm
 
-# Thiết lập chân GPIO là OUTPUT
-GPIO.setup(pin, GPIO.OUT)
+
+
 
 # Khai báo chân GPIO cho servo
 def record_audio():
@@ -158,28 +182,57 @@ def record_audio():
         print(f"\033[92m{predicted_speaker} có quyền\033[0m")
         
         if device == "cửa phòng khách":
-            motor = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=23, switch_pin_close=24)
             motor.open_door_close_door(3)
         elif device == "cửa nhà xe":
-            stepper = StepperController(pin1=21, pin2=20, pin3=16, pin4=12)
             if action == "mở":
-                stepper.rotate("forward", 3)
+                stepper.rotate("forward", 6)
+                data["Garage Door"] = 1
             else:
-                stepper.rotate("backward", 3)
+                stepper.rotate("backward", 6)
+                data["Garage Door"] = 0
         elif device == "cửa phòng ngủ con cái":
-            servo = ServoController(pin=7)
-            servo.open_door_close_door(0, 3)
+            servo_children.open_door_close_door(0, 3)
         elif device == "cửa phòng ngủ ba mẹ":
-            servo = ServoController(pin=8)
-            servo.open_door_close_door(0, 3)
+            servo_parent.open_door_close_door(0, 3)
         elif device == "đèn phòng khách":
             if action == "bật":
-                GPIO.output(pin, GPIO.HIGH) 
+                led_living.on()
+                data["Living Led"] = 1
             else:
-                GPIO.output(pin, GPIO.LOW) 
-
-                
-            
+                led_living.off()
+                data["Living Led"] = 0
+        elif device == "đèn phòng bếp":
+            if action == "bật":
+                led_kitchen.on()
+                data["Kitchen Led"] = 1
+            else:
+                led_kitchen.off()
+                data["Kitchen Led"] = 0
+        elif device == "đèn phòng ngủ ba mẹ":
+            if action == "bật":
+                led_parent.on()
+                data["Parent Led"] = 1
+            else:
+                led_parent.off()
+                data["Parent Led"] = 0
+        elif device == "đèn phòng ngủ con cái":
+            if action == "bật":
+                led_children.on()
+                data["Children Led"] = 1
+            else:
+                led_children.off()
+                data["Children Led"] = 0
+        elif device == "đèn nhà xe":
+            if action == "bật":
+                led_garage.on()
+                data["Garage Led"] = 1
+            else:
+                led_garage.off()
+                data["Garage Led"] = 0
+        humidity, temperature = dht.read_dht11()   
+        data["Humidity"] = humidity
+        data["Temperature"] = temperature
+        api.send_data(data)
     else:
         print(f"\033[91m{predicted_speaker} không có quyền có quyền\033[0m")
 try:

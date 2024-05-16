@@ -44,15 +44,15 @@ class ServoController:
         self.servo.stop()
         GPIO.cleanup()
 
-# Example usage
-if __name__ == "__main__":
-    door_controller = ServoController(pin=8)
+# # Example usage
+# if __name__ == "__main__":
+#     door_controller = ServoController(pin=8)
     
-    # Example of opening and closing the door
-    door_controller.open_door_close_door(0, 3)
+#     # Example of opening and closing the door
+#     door_controller.open_door_close_door(0, 3)
 
-    # Optionally set a custom angle
-    # door_controller.custom_angle(90)  # Adjust the door to 90 degrees
+#     # Optionally set a custom angle
+#     # door_controller.custom_angle(90)  # Adjust the door to 90 degrees
 
-    # Cleanup GPIO and PWM
-    door_controller.cleanup()
+#     # Cleanup GPIO and PWM
+#     door_controller.cleanup()

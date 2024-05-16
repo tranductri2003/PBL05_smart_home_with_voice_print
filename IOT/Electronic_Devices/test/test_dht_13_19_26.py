@@ -1,6 +1,48 @@
 import RPi.GPIO as GPIO
 import time
 import Adafruit_DHT
+
+# Thiết lập chế độ đánh số chân
+GPIO.setmode(GPIO.BCM)
+
+# Thiết lập chân GPIO13 làm đầu ra đặt mức cao
+GPIO.setup(13, GPIO.OUT)
+GPIO.output(13, GPIO.HIGH)
+
+# Thiết lập cảm biến DHT22
+DHT_SENSOR = Adafruit_DHT.DHT11
+DHT_PIN = 19  # Chân GPIO mà DHT22 kết nối tới
+
+# Thiết lập chân GPIO6 làm đầu ra và đặt mức thấp (GND)
+GPIO.setup(26, GPIO.OUT)
+GPIO.output(26, GPIO.LOW)
+
+
+    
+
+def read_dht22():
+    humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
+    if humidity is not None and temperature is not None:
+        print(f"Temperature: {temperature:.1f}°C  Humidity: {humidity:.1f}%")
+    else:
+        print("Failed to retrieve data from humidity sensor")
+
+try:
+    while True:
+        
+        read_dht22()
+        time.sleep(2)  # Đọc dữ liệu mỗi 2 giây
+
+except KeyboardInterrupt:
+    print("Program terminated")
+
+finally:
+    GPIO.cleanup()  # Dọn dẹp các thiết lập GPIO
+
+    """
+    import RPi.GPIO as GPIO
+import time
+import Adafruit_DHT
 import requests
 import subprocess
 # Thiết lập chế độ đánh số chân
@@ -95,3 +137,5 @@ except KeyboardInterrupt:
 
 finally:
     GPIO.cleanup()  # Dọn dẹp các thiết lập GPIO
+
+    """

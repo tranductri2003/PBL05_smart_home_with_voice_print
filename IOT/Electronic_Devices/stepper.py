@@ -38,22 +38,22 @@ class StepperController:
     def cleanup(self):
         GPIO.cleanup()
 
-# Sử dụng lớp StepperController
-if __name__ == "__main__":
-    pin1 = 21  # Chân GPIO tương ứng với In1
-    pin2 = 20  # Chân GPIO tương ứng với In2
-    pin3 = 16  # Chân GPIO tương ứng với In3
-    pin4 = 12  # Chân GPIO tương ứng với In4
+# # Sử dụng lớp StepperController
+# if __name__ == "__main__":
+#     pin1 = 21  # Chân GPIO tương ứng với In1
+#     pin2 = 20  # Chân GPIO tương ứng với In2
+#     pin3 = 16  # Chân GPIO tương ứng với In3
+#     pin4 = 12  # Chân GPIO tương ứng với In4
     
-    stepper = StepperController(pin1, pin2, pin3, pin4)
+#     stepper = StepperController(pin1, pin2, pin3, pin4)
 
-    while True:
-        user_input = input("Enter 'open' to rotate forward, 'close' to rotate backward: ")
-        if user_input == "open":
-            stepper.rotate("forward", 6)
-        elif user_input == "close":
-            stepper.rotate("backward", 6)
-        else:
-            print("Invalid input!")
+#     while True:
+#         user_input = input("Enter 'open' to rotate forward, 'close' to rotate backward: ")
+#         if user_input == "open":
+#             stepper.rotate("forward", 6)
+#         elif user_input == "close":
+#             stepper.rotate("backward", 6)
+#         else:
+#             print("Invalid input!")
 
-    stepper.cleanup()
+#     stepper.cleanup()
