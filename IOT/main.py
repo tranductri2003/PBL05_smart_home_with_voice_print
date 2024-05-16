@@ -158,7 +158,7 @@ def record_audio():
         print(f"\033[92m{predicted_speaker} có quyền\033[0m")
         
         if device == "cửa phòng khách":
-            motor = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=4, switch_pin_close=24)
+            motor = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=23, switch_pin_close=24)
             motor.open_door_close_door(3)
         elif device == "cửa nhà xe":
             stepper = StepperController(pin1=21, pin2=20, pin3=16, pin4=12)

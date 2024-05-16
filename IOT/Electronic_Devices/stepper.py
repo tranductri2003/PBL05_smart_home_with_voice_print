@@ -50,9 +50,9 @@ if __name__ == "__main__":
     while True:
         user_input = input("Enter 'open' to rotate forward, 'close' to rotate backward: ")
         if user_input == "open":
-            stepper.rotate("forward", 3)
+            stepper.rotate("forward", 6)
         elif user_input == "close":
-            stepper.rotate("backward", 3)
+            stepper.rotate("backward", 6)
         else:
             print("Invalid input!")
 
