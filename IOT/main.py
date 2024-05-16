@@ -64,10 +64,10 @@ led_kitchen = Led(17, 27)
 led_children = Led(10, 9)
 led_parent = Led(11)
 led_garage = Led(5, 6)
-dht = DHTSensor(13, 19, 26)
+dht = DHTSensor(13, 19, 22)
 api = API(MAC_ADDRESS)
 
-data = {
+status_data = {
     "Garage Led": 0,
     "Garage Door": 0,
     "Living Led": 0,
@@ -87,7 +87,7 @@ audio = pyaudio.PyAudio()
 
 # Khởi tạo GPIO
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP) # GPIO 26 là chân được kết nối với nút bấm
+GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_UP) # GPIO 22 là chân được kết nối với nút bấm
 
 
 
@@ -103,7 +103,7 @@ def record_audio():
 
     frames = []
 
-    while GPIO.input(26) == GPIO.LOW: # Ghi âm khi nút bấm được nhấn
+    while GPIO.input(22) == GPIO.LOW: # Ghi âm khi nút bấm được nhấn
         data = stream.read(CHUNK)
         frames.append(data)
 
@@ -178,6 +178,7 @@ def record_audio():
     action, device = extract_action_and_device(content)
     print(f"Action: {action} Device: {device}")
     
+    
     if check_permission[predicted_speaker][device] == True:
         print(f"\033[92m{predicted_speaker} có quyền\033[0m")
         
@@ -186,10 +187,10 @@ def record_audio():
         elif device == "cửa nhà xe":
             if action == "mở":
                 stepper.rotate("forward", 6)
-                data["Garage Door"] = 1
+                status_data["Garage Door"] = 1
             else:
                 stepper.rotate("backward", 6)
-                data["Garage Door"] = 0
+                status_data["Garage Door"] = 0
         elif device == "cửa phòng ngủ con cái":
             servo_children.open_door_close_door(0, 3)
         elif device == "cửa phòng ngủ ba mẹ":
@@ -197,47 +198,49 @@ def record_audio():
         elif device == "đèn phòng khách":
             if action == "bật":
                 led_living.on()
-                data["Living Led"] = 1
+                status_data["Living Led"] = 1
             else:
                 led_living.off()
-                data["Living Led"] = 0
+                status_data["Living Led"] = 0
         elif device == "đèn phòng bếp":
             if action == "bật":
                 led_kitchen.on()
-                data["Kitchen Led"] = 1
+                status_data["Kitchen Led"] = 1
             else:
                 led_kitchen.off()
-                data["Kitchen Led"] = 0
+                status_data["Kitchen Led"] = 0
         elif device == "đèn phòng ngủ ba mẹ":
             if action == "bật":
                 led_parent.on()
-                data["Parent Led"] = 1
+                status_data["Parent Led"] = 1
             else:
                 led_parent.off()
-                data["Parent Led"] = 0
+                status_data["Parent Led"] = 0
         elif device == "đèn phòng ngủ con cái":
             if action == "bật":
                 led_children.on()
-                data["Children Led"] = 1
+                status_data["Children Led"] = 1
             else:
                 led_children.off()
-                data["Children Led"] = 0
+                status_data["Children Led"] = 0
         elif device == "đèn nhà xe":
             if action == "bật":
                 led_garage.on()
-                data["Garage Led"] = 1
+                status_data["Garage Led"] = 1
             else:
                 led_garage.off()
-                data["Garage Led"] = 0
-        humidity, temperature = dht.read_dht11()   
-        data["Humidity"] = humidity
-        data["Temperature"] = temperature
-        api.send_data(data)
+                status_data["Garage Led"] = 0
+        # humidity, temperature = dht.read_dht11()   
+        # status_data["Humidity"] = humidity
+        # status_data["Temperature"] = temperature
+        api.send_data(status_data)
+        
+        print(f"\033[92mUpdate Screen!\033[0m")
     else:
         print(f"\033[91m{predicted_speaker} không có quyền có quyền\033[0m")
 try:
     while True:
-        if GPIO.input(26) == GPIO.LOW: # Nếu nút bấm được nhấn
+        if GPIO.input(22) == GPIO.LOW: # Nếu nút bấm được nhấn
             record_audio()
 except KeyboardInterrupt:
     pass

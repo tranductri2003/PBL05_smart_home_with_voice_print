@@ -1,32 +1,29 @@
 import RPi.GPIO as GPIO
+import time
 
-# Thiết lập chế độ sử dụng GPIO theo BCM
-GPIO.setmode(GPIO.BCM)
+buttonPin = 22    # Chân nhận tín hiệu của nút nhấn
+  # Chân cấp nguồn cho đèn LED
 
-# Thiết lập chân GPIO2 là chân input (đầu vào từ nút nhấn)
-GPIO.setup(2, GPIO.IN)
+GPIO.setmode(GPIO.BCM)  # Đặt chế độ chân GPIO là BOARDz
 
-# Thiết lập chân GPIO22 là chân output (đầu ra điều khiển LED) và đặt trạng thái ban đầu là HIGH
-GPIO.setup(22, GPIO.OUT, initial=GPIO.HIGH)
-
+GPIO.setup(buttonPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)   # Thiết lập chân nút nhấn là đầu vào với điện trở pull-up
+                            # Thiết lập chân đèn LED là đầu ra
 try:
     while True:
-        # Đọc trạng thái của chân GPIO2
-        button_state = GPIO.input(2)
+        # Đọc trạng thái của nút nhấn
+        buttonState = GPIO.input(buttonPin)
         
-        # Nếu nút được nhấn (trạng thái là LOW), in ra thông báo
-        if button_state == GPIO.LOW:
+        # Nếu nút được nhấn (trạng thái là LOW), in ra thông báo và bật đèn LED
+        if buttonState == GPIO.LOW:
             print("Nút đã được nhấn")
-            # Bật LED (tắt nếu muốn)
-            GPIO.output(22, GPIO.HIGH)
+        # Nếu nút không được nhấn, in ra thông báo và tắt đèn LED
         else:
             print("Chưa nhấn nút")
-            # Tắt LED (bật nếu muốn)
-            GPIO.output(22, GPIO.LOW)
+        
+        time.sleep(1)  # Đợi một chút để tránh đọc nút quá nhanh
 
 except KeyboardInterrupt:
-    print("Thoát chương trình")
+    pass
 
 finally:
-    # Dọn dẹp GPIO
-    GPIO.cleanup()
+    GPIO.cleanup()  # Dọn dẹp GPIO khi kết thúc chương trình
