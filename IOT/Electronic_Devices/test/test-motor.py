@@ -12,7 +12,7 @@ GPIO.setup(IN1, GPIO.OUT)
 GPIO.setup(IN2, GPIO.OUT)
 
 # Tạo PWM cho ENA
-pwm = GPIO.PWM(ENA, 10)  # 100 Hz
+pwm = GPIO.PWM(ENA, 50)  # 100 Hz
 pwm.start(0)  # Bắt đầu với duty cycle 0%
 
 try:

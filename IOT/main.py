@@ -20,7 +20,7 @@ import speech_recognition as sr
 
 
 from db_helper import Member, Appliance, Permission, query_members, query_appliances, query_permissions, query_member_files, get_features, connect_db
-from utils import convert_sample_rate, speech2text, extract_action_and_device
+from utils import convert_sample_rate, extract_action_and_device, speak_text
 
 from Electronic_Devices.servo import ServoController
 from Electronic_Devices.motor import MotorController
@@ -55,7 +55,7 @@ WAVE_OUTPUT_RESAMPLED_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_wi
 
 MAC_ADDRESS = "a0:a3:b3:ab:2e:10"
 
-motor = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=23, switch_pin_close=24)
+motor = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=3, switch_pin_close=24)
 stepper = StepperController(pin1=21, pin2=20, pin3=16, pin4=12)
 servo_parent = ServoController(pin=7)
 servo_children = ServoController(pin=8)
@@ -230,9 +230,11 @@ def record_audio():
             else:
                 led_garage.off()
                 status_data["Garage Led"] = 0
-        # humidity, temperature = dht.read_dht11()   
-        # status_data["Humidity"] = humidity
-        # status_data["Temperature"] = temperature
+        elif device == "cảm biến":
+            if action == "xem":
+                humidity, temperature = dht.read_dht11()   
+                status_data["Humidity"] = humidity
+                status_data["Temperature"] = temperature
         api.send_data(status_data)
         
         print(f"\033[92mUpdate Screen!\033[0m")

@@ -2,16 +2,16 @@ import RPi.GPIO as GPIO
 import time
 
 # Pin assignment
-switch_pin_close = 23
+switch_pin_open = 23
 
 # Set up GPIO
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(switch_pin_close, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(switch_pin_open, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 def main():
     try:
         while True:
-            switch_state = GPIO.input(switch_pin_close)
+            switch_state = GPIO.input(switch_pin_open)
             if switch_state == GPIO.LOW:
                 print("Công tắc hành trình đã được kích hoạt")
             else:

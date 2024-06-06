@@ -16,7 +16,7 @@ class MotorController:
         GPIO.setup(self.switch_pin_close, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
         # PWM setup
-        self.pwm = GPIO.PWM(self.enable_pin, 1000)  # Set PWM frequency to 1 kHz
+        self.pwm = GPIO.PWM(self.enable_pin, 10)  # Set PWM frequency to 1 kHz
         self.pwm.start(0)
 
     def stop_motor(self):
@@ -41,8 +41,8 @@ class MotorController:
         force_open = False
 
         while True:
-            print("Switch Open State:", GPIO.input(self.switch_pin_open))
-            print("Switch Close State:", GPIO.input(self.switch_pin_close))
+            # print("Switch Open State:", GPIO.input(self.switch_pin_open))
+            # print("Switch Close State:", GPIO.input(self.switch_pin_close))
 
             if is_moving == False:
                 self.open_door()
@@ -65,9 +65,10 @@ class MotorController:
 
 
 try:
-    door_controller = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=4, switch_pin_close=24)
+    door_controller = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=3, switch_pin_close=24)
     door_controller.open_door_close_door(3)
-    GPIO.cleanup()
 except KeyboardInterrupt:
+    door_controller.stop_motor()
+finally:
     door_controller.stop_motor()
     GPIO.cleanup()
