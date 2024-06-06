@@ -28,7 +28,7 @@ from Electronic_Devices.stepper import StepperController
 from Electronic_Devices.led import Led
 from Electronic_Devices.dht11 import DHTSensor
 from Electronic_Devices.api import API
-
+from Electronic_Devices.touch import TouchSensor
 
 # DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # SPEECH_RECOGNITION_MODEl = pipeline('automatic-speech-recognition', model='vinai/PhoWhisper-base', device=DEVICE)
@@ -64,8 +64,9 @@ led_kitchen = Led(17, 27)
 led_children = Led(10, 9)
 led_parent = Led(11)
 led_garage = Led(5, 6)
-dht = DHTSensor(13, 19, 22)
+dht = DHTSensor(13, 19, 26)
 api = API(MAC_ADDRESS)
+touch_sensor = TouchSensor(22)
 
 status_data = {
     "Garage Led": 0,
@@ -85,12 +86,6 @@ recognizer = sr.Recognizer()
 # Khởi tạo PyAudio
 audio = pyaudio.PyAudio()
 
-# Khởi tạo GPIO
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(22, GPIO.IN, pull_up_down=GPIO.PUD_UP) # GPIO 22 là chân được kết nối với nút bấm
-
-
-
 
 # Khai báo chân GPIO cho servo
 def record_audio():
@@ -103,7 +98,7 @@ def record_audio():
 
     frames = []
 
-    while GPIO.input(22) == GPIO.LOW: # Ghi âm khi nút bấm được nhấn
+    while touch_sensor.is_touched(): # Ghi âm khi nút bấm được nhấn
         data = stream.read(CHUNK)
         frames.append(data)
 
@@ -180,6 +175,8 @@ def record_audio():
     
     
     if check_permission[predicted_speaker][device] == True:
+
+        speak_text(f"Xin chào {predicted_speaker}. Bạn có quyền {action} {device}")
         print(f"\033[92m{predicted_speaker} có quyền\033[0m")
         
         if device == "cửa phòng khách":
@@ -239,10 +236,13 @@ def record_audio():
         
         print(f"\033[92mUpdate Screen!\033[0m")
     else:
+        speak_text(f"Xin chào {predicted_speaker}. Bạn không có quyền {action} {device}")
         print(f"\033[91m{predicted_speaker} không có quyền có quyền\033[0m")
+        
+        
 try:
     while True:
-        if GPIO.input(22) == GPIO.LOW: # Nếu nút bấm được nhấn
+        if touch_sensor.is_touched(): # Nếu nút bấm được nhấn
             record_audio()
 except KeyboardInterrupt:
     pass

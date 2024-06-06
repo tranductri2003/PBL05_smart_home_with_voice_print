@@ -64,11 +64,11 @@ class MotorController:
                     break
 
 
-try:
-    door_controller = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=3, switch_pin_close=24)
-    door_controller.open_door_close_door(3)
-except KeyboardInterrupt:
-    door_controller.stop_motor()
-finally:
-    door_controller.stop_motor()
-    GPIO.cleanup()
+# try:
+#     door_controller = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=3, switch_pin_close=24)
+#     door_controller.open_door_close_door(3)
+# except KeyboardInterrupt:
+#     door_controller.stop_motor()
+# finally:
+#     door_controller.stop_motor()
+#     GPIO.cleanup()
