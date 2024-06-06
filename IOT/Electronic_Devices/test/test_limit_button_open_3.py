@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 # Pin assignment
-switch_pin_open = 23
+switch_pin_open = 3
 
 # Set up GPIO
 GPIO.setmode(GPIO.BCM)

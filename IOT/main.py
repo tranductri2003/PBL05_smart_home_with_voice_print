@@ -174,7 +174,7 @@ def record_audio():
     print(f"Action: {action} Device: {device}")
     
     
-    if check_permission[predicted_speaker][device] == True:
+    if check_permission[predicted_speaker][device] == True or device == "cảm biến":
 
         speak_text(f"Xin chào {predicted_speaker}. Bạn có quyền {action} {device}")
         print(f"\033[92m{predicted_speaker} có quyền\033[0m")

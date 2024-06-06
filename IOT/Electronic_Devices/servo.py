@@ -44,9 +44,9 @@ class ServoController:
         self.servo.stop()
         GPIO.cleanup()
 
-# # Example usage
+# Example usage
 # if __name__ == "__main__":
-#     door_controller = ServoController(pin=8)
+#     door_controller = ServoController(pin=7)
     
 #     # Example of opening and closing the door
 #     door_controller.open_door_close_door(0, 3)

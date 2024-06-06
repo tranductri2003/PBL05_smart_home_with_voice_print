@@ -38,7 +38,7 @@ class StepperController:
     def cleanup(self):
         GPIO.cleanup()
 
-# # Sử dụng lớp StepperController
+# Sử dụng lớp StepperController
 # if __name__ == "__main__":
 #     pin1 = 21  # Chân GPIO tương ứng với In1
 #     pin2 = 20  # Chân GPIO tương ứng với In2

@@ -34,7 +34,7 @@ class DHTSensor:
     def cleanup(self):
         GPIO.cleanup()
 
-# # Sử dụng lớp DHTSensor với các tham số tùy chỉnh
+# Sử dụng lớp DHTSensor với các tham số tùy chỉnh
 # try:
 #     dht_sensor = DHTSensor(13, 19, 26)  # Chân HIGH là 13, chân DATA là 19, chân LOW là 26
 #     while True:
