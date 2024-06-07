@@ -1,34 +1,23 @@
-import os
 from collections import defaultdict, Counter
-import neural_net
-import inference
-import myconfig
-import dataset
-import feature_extraction
-import specaug
-import time
 import pyaudio
 import wave
 import RPi.GPIO as GPIO
-import librosa
-import soundfile as sf
-import subprocess
 from pydub import AudioSegment
-import torch
-from transformers import pipeline
 import speech_recognition as sr
 
-
-from db_helper import Member, Appliance, Permission, query_members, query_appliances, query_permissions, query_member_files, get_features, connect_db
+from db.db_helper import query_members, query_permissions, query_member_files, get_features, connect_db
 from utils import convert_sample_rate, extract_action_and_device, speak_text
 
-from Electronic_Devices.servo import ServoController
-from Electronic_Devices.motor import MotorController
-from Electronic_Devices.stepper import StepperController
-from Electronic_Devices.led import Led
-from Electronic_Devices.dht11 import DHTSensor
-from Electronic_Devices.api import API
-from Electronic_Devices.touch import TouchSensor
+from devices.servo import ServoController
+from devices.motor import MotorController
+from devices.stepper import StepperController
+from devices.led import Led
+from devices.dht11 import DHTSensor
+from devices.api import API
+from devices.touch import TouchSensor
+
+import speaker_recognition.neural_net as neural_net
+import speaker_recognition.inference as inference
 
 # DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # SPEECH_RECOGNITION_MODEl = pipeline('automatic-speech-recognition', model='vinai/PhoWhisper-base', device=DEVICE)
