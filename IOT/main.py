@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from collections import defaultdict, Counter
 import pyaudio
 import wave
@@ -22,27 +24,30 @@ import speaker_recognition.inference as inference
 # DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # SPEECH_RECOGNITION_MODEl = pipeline('automatic-speech-recognition', model='vinai/PhoWhisper-base', device=DEVICE)
 
-SPEAKER_RECOGNITION_MODEL_PATH = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/saved_model/train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu/mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"   
+# Tải các biến môi trường từ tệp .env
+load_dotenv()
+
+SPEAKER_RECOGNITION_MODEL_PATH = os.getenv("SPEAKER_RECOGNITION_MODEL_PATH")
 SPEAKER_RECOGNITION_MODEL = neural_net.get_speaker_encoder(SPEAKER_RECOGNITION_MODEL_PATH)
 
-DB_PATH = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/BackEnd/db.sqlite3"
+DB_PATH = os.getenv("DB_PATH")
 CONN = connect_db(DB_PATH)
 
-N_TAKEN_AUDIO = 5
-K_NEAREST_NEIGHBOURS = 5
+N_TAKEN_AUDIO = int(os.getenv("N_TAKEN_AUDIO"))
+K_NEAREST_NEIGHBOURS = int(os.getenv("K_NEAREST_NEIGHBOURS"))
 
 # Thiết lập các tham số ghi âm
-FORMAT = pyaudio.paInt16
-CHANNELS = 1
-RATE = 44100
-CHUNK = 512 
-RAW_RECORDING_PATH = "/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/BackEnd/audio_raw_data"
-RESAMPLED_RATE = 16000  # Tần số lấy mẫu mới
+FORMAT = eval(os.getenv("FORMAT"))
+CHANNELS = int(os.getenv("CHANNELS"))
+RATE = int(os.getenv("RATE"))
+CHUNK = int(os.getenv("CHUNK"))
+RAW_RECORDING_PATH = os.getenv("RAW_RECORDING_PATH")
+RESAMPLED_RATE = int(os.getenv("RESAMPLED_RATE"))
 
-WAVE_OUTPUT_RAW_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_raw.wav"
-WAVE_OUTPUT_RESAMPLED_FILENAME = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/IOT/temp_recorded_audio/recording_resampled.wav"
+WAVE_OUTPUT_RAW_FILENAME = os.getenv("WAVE_OUTPUT_RAW_FILENAME")
+WAVE_OUTPUT_RESAMPLED_FILENAME = os.getenv("WAVE_OUTPUT_RESAMPLED_FILENAME")
 
-MAC_ADDRESS = "a0:a3:b3:ab:2e:10"
+MAC_ADDRESS = os.getenv("MAC_ADDRESS")
 
 motor = MotorController(enable_pin=14, motor_pin1=15, motor_pin2=18, switch_pin_open=3, switch_pin_close=24)
 stepper = StepperController(pin1=21, pin2=20, pin3=16, pin4=12)
