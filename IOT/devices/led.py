@@ -36,10 +36,24 @@ class Led:
 
 # # Sử dụng lớp Led
 # try:
-#     led = Led(4)  # Chân tín hiệu là 5, chân GND là 6
+#     led_living = Led(4)
+#     led_kitchen = Led(17, 27)
+#     led_children = Led(10, 9)
+#     led_parent = Led(11)
+#     led_garage = Led(5, 6)
+    
 #     while True:
-#         led.blink()  # Bật và tắt LED
+#         led_living.blink()  # Bật và tắt LED
+#         led_kitchen.blink()  # Bật và tắt LED
+#         led_children.blink()  # Bật và tắt LED
+#         led_parent.blink()  # Bật và tắt LED
+#         led_garage.blink()  # Bật và tắt LED
+
 # except KeyboardInterrupt:
 #     print("Program terminated")
 # finally:
-#     led.cleanup()  # Dọn dẹp các thiết lập GPIO
+#     led_living.cleanup()  # Dọn dẹp các thiết lập GPIO
+#     led_kitchen.cleanup()  # Dọn dẹp các thiết lập GPIO
+#     led_children.cleanup()  # Dọn dẹp các thiết lập GPIO
+#     led_parent.cleanup()  # Dọn dẹp các thiết lập GPIO
+#     led_garage.cleanup()  # Dọn dẹp các thiết lập GPIO
