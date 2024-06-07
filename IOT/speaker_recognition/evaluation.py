@@ -3,10 +3,8 @@ import time
 import numpy as np
 import torch
 
-import dataset
-import feature_extraction
+from . import dataset, feature_extraction, neural_net
 import myconfig
-import neural_net
 
 def run_inference(features, encoder, full_sequence=myconfig.USE_FULL_SEQUENCE_INFERENCE):
     """Get the embedding of an utterance using the encoder."""

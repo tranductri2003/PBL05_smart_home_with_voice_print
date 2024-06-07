@@ -1,11 +1,10 @@
 import torch  # Importing the PyTorch library
 import numpy as np  # Importing the NumPy library
 import math
-
-import feature_extraction  # Importing the feature_extraction module
-import myconfig  # Importing the myconfig module
 from sklearn.metrics.pairwise import cosine_similarity
     
+from . import feature_extraction
+import myconfig 
 
 #---get embedding of a single utterance
 def get_embedding(file_name, encoder):

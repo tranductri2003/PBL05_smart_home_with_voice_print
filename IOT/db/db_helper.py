@@ -2,36 +2,10 @@ import sqlite3
 import numpy as np
 import json
 
-class Member:
-    def __init__(self, id, name, about):
-        self.id = id
-        self.name = name
-        self.about = about
+from models.appliance import Appliance
+from models.member import Member
+from models.permission import Permission
 
-    def __str__(self):
-        return f"Member(ID: {self.id}, Name: {self.name}, About: {self.about})"
-
-class Appliance:
-    def __init__(self, id, name, description):
-        self.id = id
-        self.name = name
-        self.description = description
-
-    def __str__(self):
-        return f"Appliance(ID: {self.id}, Name: {self.name}, Description: {self.description})"
-
-class Permission:
-    def __init__(self, id, member_id, appliance_id, member_name=None, appliance_name=None):
-        self.id = id
-        self.member_id = member_id
-        self.appliance_id = appliance_id
-        self.member_name = member_name
-        self.appliance_name = appliance_name
-
-    def __str__(self):
-        return f"Permission(ID: {self.id}, Member: {self.member_name}, Appliance: {self.appliance_name})"
-
-    
 def connect_db(db_path):
     """ Tạo kết nối đến cơ sở dữ liệu SQLite được chỉ định bởi db_path """
     conn = sqlite3.connect(db_path)

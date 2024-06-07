@@ -3,12 +3,11 @@ import random
 import librosa
 import numpy as np
 import torch
-
-import dataset
 import soundfile as sf
 
+from . import dataset, specaug
 import myconfig
-import specaug
+
 
 
 def extract_features(audio_file):

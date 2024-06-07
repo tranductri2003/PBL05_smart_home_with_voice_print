@@ -4,8 +4,8 @@ import time
 import matplotlib.pyplot as plt
 import torch
 from torch import nn
-import dataset
-import feature_extraction
+
+from . import feature_extraction, dataset
 import myconfig
 
 
