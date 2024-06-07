@@ -27,7 +27,7 @@ DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # DEVICE = "cpu"
 
 # Number of MFCC dimensions
-N_MFCC = 40
+N_MFCC = 80
 # Size of LSTM hidden layers
 LSTM_HIDDEN_SIZE = 64
 # Number of LSTM layers stacked on top of each other
@@ -39,7 +39,7 @@ FRAME_AGGREGATION_MEAN = True
 # Learning rate
 LEARNING_RATE = 0.0001
 # Length of input sequence
-SEQ_LEN = 5
+SEQ_LEN = 100
 # Whether to use SpecAugment during training or not
 SPECAUG_TRAINING = True
 # Frequency of saving the model
@@ -66,7 +66,7 @@ TRANSFORMER_HEADS = 8
 NUM_EVAL_TRIPLETS = 1000
 
 # Whether to use the full sequence for prediction
-USE_FULL_SEQUENCE_INFERENCE = False
+USE_FULL_SEQUENCE_INFERENCE = True
 # Sliding window step size
 SLIDING_WINDOW_STEP = 50
 # Evaluation threshold step size
