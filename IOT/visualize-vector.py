@@ -1,29 +1,7 @@
 import matplotlib.pyplot as plt
-from sklearn.manifold import TSNE
-from sklearn.decomposition import PCA
-import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
 
-import os
-from collections import defaultdict, Counter
-import neural_net
-import inference
-import myconfig
-import dataset
-import feature_extraction
-import specaug
-import time
-import pyaudio
-import wave
-# import RPi.GPIO as GPIO
-import librosa
-import soundfile as sf
-import subprocess
-from pydub import AudioSegment
-import torch
-from transformers import pipeline
-import speech_recognition as sr
-
+import speaker_recognition.neural_net as neural_net
+import speaker_recognition.inference as inference
 
 # Các vector nhúng
 embeddings = {
@@ -34,11 +12,11 @@ embeddings = {
     "Target": [-0.12923355, 0.19687769, -0.05927218, -0.04678532, 0.02523671, 0.09390999, -0.08268842, 0.10341525, 0.11892072, -0.03895992, -0.02831244, 0.19966005, 0.0963534, 0.25770712, -0.17599185, -0.18371049, -0.0293067, 0.05977221, -0.01158621, -0.07453463, 0.14921607, 0.1533998, 0.15797345, -0.16356373, 0.04341213, -0.17034578, 0.03549064, -0.10480014, 0.02219749, -0.20195037, 0.01111129, -0.05416701, 0.06856664, 0.02040656, -0.1398539, -0.23191254, 0.0593542, -0.12888953, 0.15219343, -0.06472621, -0.26431495, 0.29325023, 0.08961257, -0.05396147, -0.11159921, -0.17839779, 0.00400234, 0.01886819, -0.13415477, 0.08371561, 0.04348312, 0.09991992, -0.10012697, -0.13008896, 0.20013674, 0.15888421, 0.04112784, -0.23669146, 0.16150889, -0.08947594, -0.09934361, -0.08470542, -0.14031526, 0.06768908, 0.28917778, -0.00460618, 0.10029362, 0.07933898, 0.1657265, 0.13293272, -0.19411013, -0.05680631, 0.07925221, 0.03842323, 0.22960223, -0.00076151, -0.00829517, 0.01406074, 0.16714884, 0.01142332, 0.08770283, -0.02914083, -0.0569777, 0.06858894, 0.01201356, 0.21423009, -0.17771164, -0.01592552, 0.00319947, 0.04348955, 0.03232195, -0.23479588, 0.033001, -0.03269952, -0.0176157, -0.06151746, -0.17975219, -0.04129697, 0.15068354, -0.10815056, -0.05917197, 0.06127092, 0.02552412, 0.01830088, -0.16123405, -0.03259145, -0.06545661, -0.09351534, 0.16943456, -0.04528689, -0.02542153, -0.08958876, 0.09488184, -0.03742167, -0.13067529, 0.07173075, 0.04461661, 0.12726925, 0.08325134, -0.1378965, -0.14778858, 0.03854216, -0.00130984, -0.01120023, -0.24397114, 0.01886424, -0.06731401, -0.04282768]
 }
 
-SPEAKER_RECOGNITION_MODEL_PATH = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\IOT\saved_model\train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu\mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"   
+SPEAKER_RECOGNITION_MODEL_PATH = r"saved_model/train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu/mfcc_lstm_model_360h_50000epochs_specaug_8batch_3stacks_cpu.pt"   
 SPEAKER_RECOGNITION_MODEL = neural_net.get_speaker_encoder(SPEAKER_RECOGNITION_MODEL_PATH)
 
 
-audio_file_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\audio_resampled_data\Trần Đức Trí\Raspberry_Trí_Chiều_cao_trung_bình_cầu_thủ_Occ9X9a.wav"
+audio_file_path = r"temp_recorded_audio/recording_resampled.wav"
 audio_file_embedding = inference.get_embedding(audio_file_path, SPEAKER_RECOGNITION_MODEL)
 
 tri_path = r"D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\BackEnd\audio_resampled_data\Lê Văn Tiến Đạt\Raspberry_Đạt_Chiều_cao_trung_bình_cầu_thủ_4TQXsKK.wav"

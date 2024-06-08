@@ -1,0 +1,10 @@
+speech_recognition
+RPi.GPIO
+pyaudio
+gtts
+pygame
+torch
+numpy 
+librosa
+soundfile
+python-dotenv

@@ -66,7 +66,7 @@ class MemberFile(models.Model):
         
         # Nếu muốn ghép nối nhiều bản sao của âm thanh:
         sound = AudioSegment.from_file(resampled_audio_path, format="wav")
-        duplicated_sound = sound * 5  # Tạo 5 bản sao và ghép chúng lại
+        duplicated_sound = sound  # Tạo 5 bản sao và ghép chúng lại
         duplicated_sound.export(resampled_audio_path, format="wav")
         if not self.features:
             # Chỉ xử lý nếu chưa có vector
