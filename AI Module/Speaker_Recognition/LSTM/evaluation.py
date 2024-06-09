@@ -99,7 +99,7 @@ def run_eval():
     start_time = time.time()
     spk_to_utts =  dataset.get_librispeech_speaker_to_utterance(myconfig.TEST_DATA_DIR)
     print("Evaluation data:", myconfig.TEST_DATA_DIR)
-    encoder = neural_net.get_speaker_encoder(r'D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker_Recognition\LSTM\saved_model\nhi_model\models_transformer_mfcc_200k_specaug_batch_8.pt')
+    encoder = neural_net.get_speaker_encoder(r'D:\Code\BachKhoa\PBL 5\PBL05_smart_home_with_voice_print_and_antifraud_ai\AI Module\Speaker_Recognition\LSTM\saved_model\saved_model_20240606215142.pt')
     labels, scores = compute_scores(encoder, spk_to_utts, myconfig.NUM_EVAL_TRIPLETS)
     eer, eer_threshold = compute_eer(labels, scores)
     eval_time = time.time() - start_time
