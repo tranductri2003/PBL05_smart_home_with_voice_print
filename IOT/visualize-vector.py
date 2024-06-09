@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 import speaker_recognition.neural_net as neural_net
 import speaker_recognition.inference as inference
