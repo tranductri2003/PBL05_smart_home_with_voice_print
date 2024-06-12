@@ -133,13 +133,13 @@ def record_audio():
             check_permission[permission.member_name][permission.appliance_name] = True
 
 
-        speaker_base_embedding_vectors = defaultdict(list)        
-        for member in members:
-            member_features = []
-            for file in query_member_files(CONN, member.name):
-                temp_vectors = get_features(file['features'])
-                member_features.extend(temp_vectors)
-            speaker_base_embedding_vectors[member.name] = member_features
+        # speaker_base_embedding_vectors = defaultdict(list)        
+        # for member in members:
+        #     member_features = []
+        #     for file in query_member_files(CONN, member.name):
+        #         temp_vectors = get_features(file['features'])
+        #         member_features.extend(temp_vectors)
+        #     speaker_base_embedding_vectors[member.name] = member_features
 
 
         # for member in members:
@@ -283,22 +283,22 @@ def record_audio():
 
 try:
 
-    # tri_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Trí"
-    # phat_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Phát"
-    # dat_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Đạt"
-    # # tuan_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Tuấn"
+    tri_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Trí"
+    phat_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Phát"
+    dat_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Đạt"
+    # tuan_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Tuấn"
 
 
-    # tri_audio_files = [file for file in os.listdir(tri_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
-    # phat_audio_files = [file for file in os.listdir(phat_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
-    # dat_audio_files = [file for file in os.listdir(dat_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
-    # # # tuan_audio_files = [file for file in os.listdir(tuan_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
+    tri_audio_files = [file for file in os.listdir(tri_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
+    phat_audio_files = [file for file in os.listdir(phat_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
+    dat_audio_files = [file for file in os.listdir(dat_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
+    # # tuan_audio_files = [file for file in os.listdir(tuan_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
 
-    # speaker_base_embedding_vectors = defaultdict(list)        
+    speaker_base_embedding_vectors = defaultdict(list)        
 
-    # speaker_base_embedding_vectors["Trần Đức Trí"] = [inference.get_embedding(os.path.join(tri_folder_path, audio), SPEAKER_RECOGNITION_MODEL) for audio in tri_audio_files]
-    # speaker_base_embedding_vectors["Phạm Nguyễn Anh Phát"] = [inference.get_embedding(os.path.join(phat_folder_path, audio), SPEAKER_RECOGNITION_MODEL) for audio in phat_audio_files]
-    # speaker_base_embedding_vectors["Lê Văn Tiến Đạt"] = [inference.get_embedding(os.path.join(dat_folder_path, audio), SPEAKER_RECOGNITION_MODEL) for audio in dat_audio_files]
+    speaker_base_embedding_vectors["Trần Đức Trí"] = [inference.get_embedding(os.path.join(tri_folder_path, audio), SPEAKER_RECOGNITION_MODEL) for audio in tri_audio_files]
+    speaker_base_embedding_vectors["Phạm Nguyễn Anh Phát"] = [inference.get_embedding(os.path.join(phat_folder_path, audio), SPEAKER_RECOGNITION_MODEL) for audio in phat_audio_files]
+    speaker_base_embedding_vectors["Lê Văn Tiến Đạt"] = [inference.get_embedding(os.path.join(dat_folder_path, audio), SPEAKER_RECOGNITION_MODEL) for audio in dat_audio_files]
     print("Ready...")
     
     while True:
