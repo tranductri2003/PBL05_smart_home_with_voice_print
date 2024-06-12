@@ -9,7 +9,7 @@ Currently, smart home systems combined with identity and access management are t
 ## Clone this repository
 
 ```bash
-git clone https://github.com/tranductri2003/PBL05_smart_home_with_voice_print_and_antifraud_ai.git
+git clone https://github.com/tranductri2003/PBL05_smart_home_with_voice_print
 ```
 
 ## Backend
