@@ -36,11 +36,13 @@ class Led:
 
 # # Sử dụng lớp Led
 # try:
+
 #     led_living = Led(4)
 #     led_kitchen = Led(17, 27)
 #     led_children = Led(10, 9)
 #     led_parent = Led(11)
 #     led_garage = Led(5, 6)
+    
     
 #     while True:
 #         led_living.blink()  # Bật và tắt LED

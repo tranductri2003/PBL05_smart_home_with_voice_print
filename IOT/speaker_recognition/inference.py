@@ -32,7 +32,27 @@ def compute_distance(embedding1, embedding2):
             result += abs(embedding1[i] - embedding2[i]) ** 2
         return math.sqrt(result)
     
+def compute_cosine_similarity(embedding1, embedding2):
+    # Ensure the embeddings have the same length
+    if len(embedding1) != len(embedding2):
+        print("Different lengths of embeddings")
+        return None
     
+    # Compute the dot product of the embeddings
+    dot_product = sum(a * b for a, b in zip(embedding1, embedding2))
+    
+    # Compute the norms of the embeddings
+    norm1 = math.sqrt(sum(a ** 2 for a in embedding1))
+    norm2 = math.sqrt(sum(b ** 2 for b in embedding2))
+    
+    # Check if any of the norms is zero
+    if norm1 == 0 or norm2 == 0:
+        print("One of the embeddings is zero vector")
+        return None
+    
+    # Compute and return the cosine similarity
+    return -dot_product / (norm1 * norm2)
+
 def my_inference(features, encoder, is_full_sequence_inference = myconfig.USE_FULL_SEQUENCE_INFERENCE):
     """
     Extracts the embedding of a single utterance or a sequence of utterances using the provided encoder model.

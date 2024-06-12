@@ -50,9 +50,9 @@ class StepperController:
 #     while True:
 #         user_input = input("Enter 'open' to rotate forward, 'close' to rotate backward: ")
 #         if user_input == "open":
-#             stepper.rotate("forward", 6)
+#             stepper.rotate("forward", 5)
 #         elif user_input == "close":
-#             stepper.rotate("backward", 6)
+#             stepper.rotate("backward", 5)
 #         else:
 #             print("Invalid input!")
 

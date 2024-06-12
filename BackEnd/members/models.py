@@ -7,7 +7,7 @@ from .speaker_recognition import inference, neural_net
 import numpy as np
 
 BASE_DIR = os.path.dirname(os.getcwd())
-ENCODER_PATH = os.path.join(BASE_DIR, "AI Module", "Speaker_Recognition", "LSTM", "saved_model", "train-clean-360-hours-50000-epochs-specaug-8-batch-3-stacks-cpu", "saved_model_20240324123652.ckpt-50000.pt")
+ENCODER_PATH = os.path.join(BASE_DIR, "AI Module", "Speaker_Recognition", "LSTM", "saved_model", "saved_model_20240606215142.pt")
 
 def convert_audio_to_vector(ENCODER_PATH, audio_file_path):
     ENCODER = neural_net.get_speaker_encoder(ENCODER_PATH)
@@ -52,25 +52,43 @@ class MemberFile(models.Model):
             # Đọc chuỗi JSON và chuyển nó thành một list
             features_list = json.loads(self.features)
             # Chuyển list thành np.ndarray
-            return np.array(features_list)
+            return [np.array(features) for features in features_list]
         return None
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         file_name = os.path.basename(self.file.name)
         raw_audio_path = self.file.path
-        resampled_audio_path = os.path.join('audio_resampled_data', str(self.member.name), file_name)
+        resampled_audio_dir = os.path.join('audio_resampled_data', str(self.member.name))
+        os.makedirs(resampled_audio_dir, exist_ok=True)
         
         # Resample audio
+        resampled_audio_path = os.path.join(resampled_audio_dir, file_name)
         convert_sample_rate(raw_audio_path, resampled_audio_path, 16000)
         
-        # Nếu muốn ghép nối nhiều bản sao của âm thanh:
+        # Chia file thành các đoạn nhỏ 3 giây
         sound = AudioSegment.from_file(resampled_audio_path, format="wav")
-        duplicated_sound = sound  # Tạo 5 bản sao và ghép chúng lại
-        duplicated_sound.export(resampled_audio_path, format="wav")
-        if not self.features:
-            # Chỉ xử lý nếu chưa có vector
-            extracted_features = convert_audio_to_vector(ENCODER_PATH, resampled_audio_path)
+        segment_duration = 3000  # 3 giây tính bằng milliseconds
+        segments = [sound[i:i+segment_duration] for i in range(0, len(sound), segment_duration)]
+
+        # Lưu các feature của từng đoạn nhỏ
+        all_features = []
+
+        for i, segment in enumerate(segments):
+            segment_path = os.path.join(resampled_audio_dir, f"{file_name}_segment_{i}.wav")
+            segment.export(segment_path, format="wav")
+            
+            # Extract features for this segment
+            extracted_features = convert_audio_to_vector(ENCODER_PATH, segment_path)
             features_list = extracted_features.tolist() if isinstance(extracted_features, np.ndarray) else extracted_features
-            self.features = json.dumps(features_list)  # Convert list to JSON string
-            super().save(*args, **kwargs)
+            all_features.append(features_list)
+
+        # Lưu list các list feature dưới dạng JSON
+        self.features = json.dumps(all_features)
+        super().save(*args, **kwargs)
+        
+        # Xóa file âm thanh gốc và file resampled đầy đủ
+        if os.path.exists(raw_audio_path):
+            os.remove(raw_audio_path)
+        if os.path.exists(resampled_audio_path):
+            os.remove(resampled_audio_path)

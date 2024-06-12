@@ -19,4 +19,6 @@ LibriSpeech
 Nhi
 voicerecognizer_torchv2env
 Audio_speakerRecognition
-
+test-new-model-mic/
+audio_raw_data/
+audio_resampled_data/

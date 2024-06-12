@@ -88,14 +88,15 @@ def print_tables_in_database(db_path):
 
     # Đóng kết nối đến cơ sở dữ liệu
     conn.close()
-   
-def get_features(feature):
-    """Chuyển chuỗi JSON trở lại thành np.ndarray."""
-    # Đọc chuỗi JSON và chuyển nó thành một list
-    features_list = json.loads(feature)
-    # Chuyển list thành np.ndarray
-    return np.array(features_list)
     
+def get_features(features):
+    """Chuyển chuỗi JSON trở lại thành list np.ndarray."""
+    if features:
+        # Đọc chuỗi JSON và chuyển nó thành một list
+        features_list = json.loads(features)
+        # Chuyển list thành list of np.ndarray
+        return [np.array(feature) for feature in features_list]
+    return None
 # conn = connect_db("/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/BackEnd/db.sqlite3")
 # appliances = query_appliances(conn)
 # permissions = query_permissions(conn)
