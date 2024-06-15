@@ -133,13 +133,13 @@ def record_audio():
             check_permission[permission.member_name][permission.appliance_name] = True
 
 
-        speaker_base_embedding_vectors = defaultdict(list)        
-        for member in members:
-            member_features = []
-            for file in query_member_files(CONN, member.name):
-                temp_vectors = get_features(file['features'])
-                member_features.extend(temp_vectors)
-            speaker_base_embedding_vectors[member.name] = member_features
+        # speaker_base_embedding_vectors = defaultdict(list)        
+        # for member in members:
+        #     member_features = []
+        #     for file in query_member_files(CONN, member.name):
+        #         temp_vectors = get_features(file['features'])
+        #         member_features.extend(temp_vectors)
+        #     speaker_base_embedding_vectors[member.name] = member_features
 
 
         # for member in members:
@@ -205,100 +205,101 @@ def record_audio():
         action, device = extract_action_and_device(content)
         print(f"Action: {action} Device: {device}")
 
-        if check_permission[predicted_speaker][device] == True:
-            if action == None or device == None:
-                speak_text(f"Xin chào {predicted_speaker}. Thiết bị không nhận diện được")
-                print(f"\033[92mXin chào {predicted_speaker}. Thiết bị không nhận diện được\033[0m")
-            else:
-                speak_text(f"Xin chào {predicted_speaker}. Bạn có quyền {action} {device}")
-                print(f"\033[92m{predicted_speaker} có quyền\033[0m")
 
-            try:
-                if device == "cửa phòng khách":
-                    motor.open_door_close_door(3)
-                elif device == "cửa nhà xe":
-                    if action == "mở":
-                        stepper.rotate("forward", 5)
-                        status_data["Garage Door"] = 1
-                    else:
-                        stepper.rotate("backward", 5)
-                        status_data["Garage Door"] = 0
-                elif device == "cửa phòng ngủ con cái":
-                    servo_children.open_door_close_door(0, 6)
-                elif device == "cửa phòng ngủ ba mẹ":
-                    servo_parent.open_door_close_door(0, 6)
-                elif device == "đèn phòng khách":
-                    if action == "bật":
-                        led_living.on()
-                        status_data["Living Led"] = 1
-                    else:
-                        led_living.off()
-                        status_data["Living Led"] = 0
-                elif device == "đèn phòng bếp":
-                    if action == "bật":
-                        led_kitchen.on()
-                        status_data["Kitchen Led"] = 1
-                    else:
-                        led_kitchen.off()
-                        status_data["Kitchen Led"] = 0
-                elif device == "đèn phòng ngủ ba mẹ":
-                    if action == "bật":
-                        led_parent.on()
-                        status_data["Parent Led"] = 1
-                    else:
-                        led_parent.off()
-                        status_data["Parent Led"] = 0
-                elif device == "đèn phòng ngủ con cái":
-                    if action == "bật":
-                        led_children.on()
-                        status_data["Children Led"] = 1
-                    else:
-                        led_children.off()
-                        status_data["Children Led"] = 0
-                elif device == "đèn nhà xe":
-                    if action == "bật":
-                        led_garage.on()
-                        status_data["Garage Led"] = 1
-                    else:
-                        led_garage.off()
-                        status_data["Garage Led"] = 0
-                elif device == "cảm biến":
-                    if action == "xem":
-                        humidity, temperature = dht.read_dht11()
-                        status_data["Humidity"] = humidity
-                        status_data["Temperature"] = temperature
-                        
-                        speak_text(f"Nhiệt độ hiện tại là {temperature} độ C và độ ẩm là {humidity} %")
-
-                api.send_data(status_data)
-            except Exception as e:
-                print(f"Error controlling device: {e}")
-
-            print(f"\033[92mUpdate Screen!\033[0m")
+        if action == None or device == None:
+            speak_text(f"Thiết bị hoặc hành động không nhận diện được")
+            print(f"\033[92mThiết bị hoặc hành động không nhận diện được\033[0m")
         else:
-            speak_text(f"Xin chào {predicted_speaker}. Bạn không có quyền {action} {device}")
-            print(f"\033[91m{predicted_speaker} không có quyền có quyền\033[0m")
+            if check_permission[predicted_speaker][device] == True:
+                speak_text(f"Xin chào {predicted_speaker}. Bạn có quyền {action} {device}")
+                print(f"\033[92m{predicted_speaker} có quyền {action} {device}\033[0m")
+
+                try:
+                    if device == "cửa phòng khách":
+                        motor.open_door_close_door(3)
+                    elif device == "cửa nhà xe":
+                        if action == "mở":
+                            stepper.rotate("forward", 5)
+                            status_data["Garage Door"] = 1
+                        else:
+                            stepper.rotate("backward", 5)
+                            status_data["Garage Door"] = 0
+                    elif device == "cửa phòng ngủ con cái":
+                        servo_children.open_door_close_door(0, 6)
+                    elif device == "cửa phòng ngủ ba mẹ":
+                        servo_parent.open_door_close_door(0, 6)
+                    elif device == "đèn phòng khách":
+                        if action == "bật":
+                            led_living.on()
+                            status_data["Living Led"] = 1
+                        else:
+                            led_living.off()
+                            status_data["Living Led"] = 0
+                    elif device == "đèn phòng bếp":
+                        if action == "bật":
+                            led_kitchen.on()
+                            status_data["Kitchen Led"] = 1
+                        else:
+                            led_kitchen.off()
+                            status_data["Kitchen Led"] = 0
+                    elif device == "đèn phòng ngủ ba mẹ":
+                        if action == "bật":
+                            led_parent.on()
+                            status_data["Parent Led"] = 1
+                        else:
+                            led_parent.off()
+                            status_data["Parent Led"] = 0
+                    elif device == "đèn phòng ngủ con cái":
+                        if action == "bật":
+                            led_children.on()
+                            status_data["Children Led"] = 1
+                        else:
+                            led_children.off()
+                            status_data["Children Led"] = 0
+                    elif device == "đèn nhà xe":
+                        if action == "bật":
+                            led_garage.on()
+                            status_data["Garage Led"] = 1
+                        else:
+                            led_garage.off()
+                            status_data["Garage Led"] = 0
+                    elif device == "cảm biến":
+                        if action == "xem":
+                            humidity, temperature = dht.read_dht11()
+                            status_data["Humidity"] = humidity
+                            status_data["Temperature"] = temperature
+                            
+                            speak_text(f"Nhiệt độ hiện tại là {temperature} độ C và độ ẩm là {humidity} %")
+
+                    api.send_data(status_data)
+                except Exception as e:
+                    print(f"Error controlling device: {e}")
+
+                print(f"\033[92mUpdate Screen!\033[0m")
+            else:
+                speak_text(f"Xin chào {predicted_speaker}. Bạn không có quyền {action} {device}")
+                print(f"\033[91m{predicted_speaker} không có quyền {action} {device}\033[0m")
     except Exception as e:
         print(f"Error in record_audio: {e}")
 
 try:
 
-    # tri_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Trí"
-    # phat_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Phát"
-    # dat_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Đạt"
-    # # tuan_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Tuấn"
+    tri_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Trí"
+    phat_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Phát"
+    dat_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Đạt"
+    # tuan_folder_path = r"/home/tranductri2003/Code/PBL05_smart_home_with_voice_print_and_antifraud_ai/test-new-model-mic/Tuấn"
 
 
-    # tri_audio_files = [file for file in os.listdir(tri_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
-    # phat_audio_files = [file for file in os.listdir(phat_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
-    # dat_audio_files = [file for file in os.listdir(dat_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
-    # # # tuan_audio_files = [file for file in os.listdir(tuan_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
+    tri_audio_files = [file for file in os.listdir(tri_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
+    phat_audio_files = [file for file in os.listdir(phat_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
+    dat_audio_files = [file for file in os.listdir(dat_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
+    # # tuan_audio_files = [file for file in os.listdir(tuan_folder_path)[:N_TAKEN_AUDIO] if file.endswith(".wav")]
 
-    # speaker_base_embedding_vectors = defaultdict(list)        
+    speaker_base_embedding_vectors = defaultdict(list)        
 
-    # speaker_base_embedding_vectors["Trần Đức Trí"] = [inference.get_embedding(os.path.join(tri_folder_path, audio), SPEAKER_RECOGNITION_MODEL) for audio in tri_audio_files]
-    # speaker_base_embedding_vectors["Phạm Nguyễn Anh Phát"] = [inference.get_embedding(os.path.join(phat_folder_path, audio), SPEAKER_RECOGNITION_MODEL) for audio in phat_audio_files]
-    # speaker_base_embedding_vectors["Lê Văn Tiến Đạt"] = [inference.get_embedding(os.path.join(dat_folder_path, audio), SPEAKER_RECOGNITION_MODEL) for audio in dat_audio_files]
+    speaker_base_embedding_vectors["Trần Đức Trí"] = [inference.get_embedding(os.path.join(tri_folder_path, audio), SPEAKER_RECOGNITION_MODEL) for audio in tri_audio_files]
+    speaker_base_embedding_vectors["Phạm Nguyễn Anh Phát"] = [inference.get_embedding(os.path.join(phat_folder_path, audio), SPEAKER_RECOGNITION_MODEL) for audio in phat_audio_files]
+    speaker_base_embedding_vectors["Lê Văn Tiến Đạt"] = [inference.get_embedding(os.path.join(dat_folder_path, audio), SPEAKER_RECOGNITION_MODEL) for audio in dat_audio_files]
     print("Ready...")
     
     while True:
